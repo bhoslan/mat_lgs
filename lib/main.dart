@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mat_lgs/view/login/sign_up.dart';
+import 'package:mat_lgs/view/login/login_page.dart';
 
 void main() => runApp(const HomePage());
 
@@ -11,7 +11,7 @@ class HomePage extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Bitirme Tezi',
-      home: SignUpPage(),
+      home: LoginPage(),
     );
   }
 }

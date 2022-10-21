@@ -5,16 +5,18 @@ import 'package:mat_lgs/component/list-tile/login_listtile.dart';
 import 'package:mat_lgs/constants/app/app_constants.dart';
 import 'package:mat_lgs/view/login/register_page.dart';
 
-void main() => runApp(const SignUpPage());
+import 'forgot_password_page.dart';
 
-class SignUpPage extends StatefulWidget {
-  const SignUpPage({super.key});
+void main() => runApp(const LoginPage());
+
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
   @override
-  State<SignUpPage> createState() => _SignUpPageState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _SignUpPageState extends State<SignUpPage> {
+class _LoginPageState extends State<LoginPage> {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
 
@@ -23,7 +25,7 @@ class _SignUpPageState extends State<SignUpPage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
-      appBar:   AppBar(
+      appBar: AppBar(
         backgroundColor: Colors.white,
         centerTitle: true,
         title: const Text(
@@ -57,7 +59,7 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
           LoginListTile(
             email: password,
-            hintText: "şifre",
+            hintText: "Şifre",
             iconColor: Colors.grey,
             keyboardType: TextInputType.visiblePassword,
             prefixIcon: Icons.lock_outline,
@@ -73,11 +75,11 @@ class _SignUpPageState extends State<SignUpPage> {
                     style: TextStyle(fontWeight: FontWeight.w400)),
                 TextButton(
                     onPressed: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //       builder: (context) => ForgotPasswordPage()),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ForgotPasswordPage()),
+                      );
                     },
                     child: const Text("Şifremi unuttum",
                         style: TextStyle(
@@ -89,9 +91,7 @@ class _SignUpPageState extends State<SignUpPage> {
               ],
             ),
           ),
-          LoginButton(text: "Giriş Yap", onPressed: () {
-
-          }),
+          LoginButton(text: "Giriş Yap", onPressed: () {}),
           Container(
             color: Colors.white,
             margin: const EdgeInsets.only(top: 0),
@@ -103,7 +103,8 @@ class _SignUpPageState extends State<SignUpPage> {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const RegisterPage()),
+                        MaterialPageRoute(
+                            builder: (context) => const RegisterPage()),
                       );
                     },
                     child: const Text("Kayıt ol",

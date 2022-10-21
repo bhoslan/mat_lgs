@@ -74,7 +74,7 @@ class _RegisterPageState extends State<RegisterPage> {
           ),
           LoginListTile(
             email: password,
-            hintText: "şifre",
+            hintText: "Şifre",
             iconColor: Colors.grey,
             keyboardType: TextInputType.visiblePassword,
             prefixIcon: Icons.lock_outline,
