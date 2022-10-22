@@ -1,7 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:mat_lgs/component/button/login_buttons.dart';
-
 import '../../component/container/login_text_container.dart';
 import '../../component/list-tile/login_listtile.dart';
 

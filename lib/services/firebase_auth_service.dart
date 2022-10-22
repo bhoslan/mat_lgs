@@ -41,6 +41,7 @@ class FirebaseAuthService implements AuthBaseService {
     User? user = await _firebaseAuth
         .signInWithEmailAndPassword(email: email, password: password)
         .then((value) => value.user);
-    _fromFirebasetoMyUser(user);
+    return _fromFirebasetoMyUser(user);
+
   }
 }

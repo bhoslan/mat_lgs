@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mat_lgs/services/fake_auth_service.dart';
+import 'package:mat_lgs/services/firebase_auth_service.dart';
 import 'package:mat_lgs/view/login/landing_page.dart';
-import 'package:mat_lgs/view/login/login_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
@@ -18,10 +17,10 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return  MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Bitirme Tezi',
-      home: LoginPage(),
+      home:  LandingPage(authService: FirebaseAuthService(),),
     );
   }
 }

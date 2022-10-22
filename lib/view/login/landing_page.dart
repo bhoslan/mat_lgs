@@ -13,7 +13,7 @@ class LandingPage extends StatefulWidget {
 }
 
 class _LandingPageState extends State<LandingPage> {
-   MyUser? user;
+  MyUser? user;
   @override
   void initState() {
     super.initState();
@@ -22,6 +22,7 @@ class _LandingPageState extends State<LandingPage> {
 
   @override
   Widget build(BuildContext context) {
+    
     if (user == null) {
       return const RegisterPage();
     } else {
@@ -35,6 +36,7 @@ class _LandingPageState extends State<LandingPage> {
       setState(() {
         user = myUser;
       });
+      return user;
     } else {
       return null;
     }

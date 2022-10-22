@@ -5,6 +5,7 @@ import 'package:mat_lgs/component/list-tile/login_listtile.dart';
 import 'package:mat_lgs/constants/app/app_constants.dart';
 import 'package:mat_lgs/view/login/register_page.dart';
 
+import '../../services/auth_base_service.dart';
 import 'forgot_password_page.dart';
 
 void main() => runApp(const LoginPage());
@@ -17,9 +18,10 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  late AuthBaseService authService;
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
