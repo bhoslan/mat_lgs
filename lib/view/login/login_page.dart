@@ -3,6 +3,8 @@ import 'package:mat_lgs/component/button/login_buttons.dart';
 import 'package:mat_lgs/component/container/login_text_container.dart';
 import 'package:mat_lgs/component/list-tile/login_listtile.dart';
 import 'package:mat_lgs/constants/app/app_constants.dart';
+import 'package:mat_lgs/locator.dart';
+import 'package:mat_lgs/services/firebase_auth_service.dart';
 import 'package:mat_lgs/view/login/register_page.dart';
 
 import '../../services/auth_base_service.dart';
@@ -18,10 +20,10 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  late AuthBaseService authService;
+  AuthBaseService authService = locator<FirebaseAuthService>();
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

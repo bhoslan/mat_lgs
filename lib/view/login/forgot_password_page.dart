@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:mat_lgs/component/button/login_buttons.dart';
 import 'package:mat_lgs/component/container/login_text_container.dart';
 import 'package:mat_lgs/component/list-tile/login_listtile.dart';
+import '../../locator.dart';
+import '../../services/auth_base_service.dart';
+import '../../services/firebase_auth_service.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
   ForgotPasswordPage({super.key});
@@ -11,6 +14,8 @@ class ForgotPasswordPage extends StatefulWidget {
 }
 
 class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
+  AuthBaseService authService = locator<FirebaseAuthService>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,9 +43,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
           const LoginTextContainer(
             text: "E-mail",
           ),
-          LoginButton(text: "Şifreyi Sıfırla", onPressed: () {
-            
-          })
+          LoginButton(text: "Şifreyi Sıfırla", onPressed: () {})
         ],
       ),
     );

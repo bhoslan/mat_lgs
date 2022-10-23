@@ -1,8 +1,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:mat_lgs/component/button/login_buttons.dart';
+import 'package:mat_lgs/services/auth_base_service.dart';
+import 'package:mat_lgs/services/firebase_auth_service.dart';
 import '../../component/container/login_text_container.dart';
 import '../../component/list-tile/login_listtile.dart';
+import '../../locator.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -12,6 +15,7 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  AuthBaseService authService = locator<FirebaseAuthService>();
   TextEditingController userName = TextEditingController();
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();

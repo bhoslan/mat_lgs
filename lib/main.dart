@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mat_lgs/locator.dart';
 import 'package:mat_lgs/services/firebase_auth_service.dart';
 import 'package:mat_lgs/view/login/landing_page.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -9,6 +10,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  setUpLocator();
   runApp(const HomePage());
 }
 
@@ -17,10 +19,10 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Bitirme Tezi',
-      home:  LandingPage(authService: FirebaseAuthService(),),
+      home: LandingPage(),
     );
   }
 }
