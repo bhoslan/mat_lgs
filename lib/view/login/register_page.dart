@@ -1,11 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:mat_lgs/component/button/login_buttons.dart';
-import 'package:mat_lgs/services/auth_base_service.dart';
-import 'package:mat_lgs/services/firebase_auth_service.dart';
+import 'package:mat_lgs/viewmodels.dart/user_viewmodel.dart';
+import 'package:provider/provider.dart';
 import '../../component/container/login_text_container.dart';
 import '../../component/list-tile/login_listtile.dart';
-import '../../locator.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -15,12 +14,13 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  AuthBaseService authService = locator<FirebaseAuthService>();
   TextEditingController userName = TextEditingController();
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    final UserViewModel userViewModel = Provider.of(context);
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
@@ -61,6 +61,7 @@ class _RegisterPageState extends State<RegisterPage> {
             email: userName,
             prefixIcon: Icons.nest_cam_wired_stand,
             hintText: "Kullanıcı Adı",
+
           ),
           const LoginTextContainer(
             text: "Kullanıcı Adı",
@@ -83,7 +84,9 @@ class _RegisterPageState extends State<RegisterPage> {
             prefixIcon: Icons.lock_outline,
             obscureText: true,
           ),
-          LoginButton(text: "Kayıt ol", onPressed: () {}),
+          LoginButton(text: "Kayıt ol", onPressed: () {
+
+          }),
           Container(
             margin: const EdgeInsets.only(left: 60, right: 60),
             alignment: Alignment.center,

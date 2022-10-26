@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mat_lgs/locator.dart';
-import 'package:mat_lgs/services/firebase_auth_service.dart';
 import 'package:mat_lgs/view/login/landing_page.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:mat_lgs/viewmodels.dart/user_viewmodel.dart';
+import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -11,18 +12,22 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   setUpLocator();
-  runApp(const HomePage());
+  runApp(const MainPage());
 }
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class MainPage extends StatelessWidget {
+  const MainPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Bitirme Tezi',
-      home: LandingPage(),
+      home: ChangeNotifierProvider(
+        //Widget tree UserModelView enjekte edildi
+        create: (BuildContext context) => UserViewModel(),
+        child: const LandingPage(),
+      ),
     );
   }
 }
