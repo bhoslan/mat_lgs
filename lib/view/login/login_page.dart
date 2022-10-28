@@ -1,9 +1,15 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mat_lgs/component/button/login_buttons.dart';
 import 'package:mat_lgs/component/container/login_text_container.dart';
 import 'package:mat_lgs/component/list-tile/login_listtile.dart';
 import 'package:mat_lgs/constants/app/app_constants.dart';
+import 'package:mat_lgs/view/home_page.dart';
 import 'package:mat_lgs/view/login/register_page.dart';
+import 'package:mat_lgs/viewmodels.dart/user_viewmodel.dart';
+import 'package:provider/provider.dart';
+import '../../locator.dart';
+import '../../models/user.dart';
 import 'forgot_password_page.dart';
 
 void main() => runApp(const LoginPage());
@@ -21,7 +27,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
@@ -39,11 +44,11 @@ class _LoginPageState extends State<LoginPage> {
         ),
         elevation: 0, //AppBar'ın arka planını beyaz yapar.
       ),
-      body: _buildEmailPassword(),
+      body: _buildEmailPassword(context),
     );
   }
 
-  Widget _buildEmailPassword() {
+  Widget _buildEmailPassword(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -91,7 +96,32 @@ class _LoginPageState extends State<LoginPage> {
               ],
             ),
           ),
-          LoginButton(text: "Giriş Yap", onPressed: () {}),
+          LoginButton(
+            text: "Giriş Yap",
+            onPressed: () async {
+              Provider.of<UserViewModel>(context, listen: false)
+                  .signInEmailPassword(email.text, password.text);
+              MyUser? myUser = await Provider.of<UserViewModel>(context, listen: false).currentUser();
+              if (myUser != null) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => HomePage(myUser: myUser),
+                  ),
+                );
+              }
+
+              ;
+              //   MyUser? myUser =  Provider.of<UserViewModel>(context,listen: false)
+              //       .signInEmailPassword(email.text, password.text) as MyUser?;
+              //   if (myUser != null) {
+              //     Navigator.push(
+              //         context,
+              //         MaterialPageRoute(
+              //             builder: (context) => HomePage(myUser: myUser)));
+              //   }
+            },
+          ),
           Container(
             color: Colors.white,
             margin: const EdgeInsets.only(top: 0),
@@ -104,7 +134,8 @@ class _LoginPageState extends State<LoginPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const RegisterPage()),
+                            builder: (BuildContext context) =>
+                                const RegisterPage()),
                       );
                     },
                     child: const Text("Kayıt ol",

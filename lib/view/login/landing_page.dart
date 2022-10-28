@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mat_lgs/view/home_page.dart';
 import 'package:mat_lgs/view/login/login_page.dart';
-import 'package:mat_lgs/view/login/register_page.dart';
 import 'package:mat_lgs/viewmodels.dart/user_viewmodel.dart';
 import 'package:provider/provider.dart';
 
@@ -20,12 +19,12 @@ class LandingPage extends StatelessWidget {
           myUser: userViewmodel.myUser!,
         );
       }
-    }
-
-    if (userViewmodel.myUser == null) {
-      return const RegisterPage();
     } else {
-      return const LoginPage();
+      return const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
     }
   }
 }

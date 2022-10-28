@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:mat_lgs/models/user.dart';
 import 'package:mat_lgs/services/auth_base_service.dart';
 
@@ -19,5 +20,15 @@ class FakeAuthService implements AuthBaseService {
     return Future.delayed(const Duration(seconds: 2), () {
       return MyUser(myUserId: userId);
     });
+  }
+
+  @override
+  Future<void> signOut() async {
+    debugPrint("Fake servisten çıkış yapıldı");
+  }
+  
+  @override
+  Future register(email,password) async {
+     debugPrint("Fake servisten çıkış yapıldı");
   }
 }

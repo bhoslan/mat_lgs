@@ -19,7 +19,7 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController password = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    final UserViewModel userViewModel = Provider.of(context);
+    // final UserViewModel userViewModel = Provider.of(context);
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -49,11 +49,11 @@ class _RegisterPageState extends State<RegisterPage> {
         ),
         elevation: 0,
       ),
-      body: _buildNickNameEmailPassword(),
+      body: _buildNickNameEmailPassword(context),
     );
   }
 
-  _buildNickNameEmailPassword() {
+  _buildNickNameEmailPassword(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -61,7 +61,6 @@ class _RegisterPageState extends State<RegisterPage> {
             email: userName,
             prefixIcon: Icons.nest_cam_wired_stand,
             hintText: "Kullanıcı Adı",
-
           ),
           const LoginTextContainer(
             text: "Kullanıcı Adı",
@@ -84,9 +83,12 @@ class _RegisterPageState extends State<RegisterPage> {
             prefixIcon: Icons.lock_outline,
             obscureText: true,
           ),
-          LoginButton(text: "Kayıt ol", onPressed: () {
-
-          }),
+          LoginButton(
+              text: "Kayıt ol",
+              onPressed: () {
+                Provider.of<UserViewModel>(context, listen: false).register(
+                    email.text, password.text);
+              }),
           Container(
             margin: const EdgeInsets.only(left: 60, right: 60),
             alignment: Alignment.center,

@@ -1,5 +1,6 @@
 // ignore_for_file: constant_identifier_names
 
+import 'package:flutter/material.dart';
 import 'package:mat_lgs/locator.dart';
 import 'package:mat_lgs/models/user.dart';
 import 'package:mat_lgs/services/auth_base_service.dart';
@@ -23,7 +24,7 @@ class UserRepository implements AuthBaseService {
         return await _firebaseAuthService.currentUser();
       }
     } catch (e) {
-      print("Repository currentUser HATA !${e.toString()}");
+      debugPrint("Repository currentUser HATA !${e.toString()}");
       return null;
     }
   }
@@ -37,7 +38,7 @@ class UserRepository implements AuthBaseService {
         return await _firebaseAuthService.isSignOut();
       }
     } catch (e) {
-      print("Repository isSignOut HATA !${e.toString()}");
+      debugPrint("Repository isSignOut HATA !${e.toString()}");
       return false;
     }
   }
@@ -51,8 +52,34 @@ class UserRepository implements AuthBaseService {
         return await _firebaseAuthService.signInEmailPassword(email, password);
       }
     } catch (e) {
-      print("Repository signInEmailPassword HATA !${e.toString()}");
+      debugPrint("Repository signInEmailPassword HATA !${e.toString()}");
       return null;
+    }
+  }
+
+  @override
+  Future<void> signOut() async {
+    try {
+      if (appMode == AppMode.DEBUG) {
+        return await _fakeAuthService.signOut();
+      } else {
+        return await _firebaseAuthService.signOut();
+      }
+    } catch (e) {
+      debugPrint("Repository signOut HATA !${e.toString()}");
+    }
+  }
+  
+  @override
+  Future register(String email, String password) async{
+    try {
+      if (appMode == AppMode.DEBUG) {
+        return await _fakeAuthService.register(email,password);
+      } else {
+        return await _firebaseAuthService.register(email,password);
+      }
+    } catch (e) {
+      debugPrint("Repository signOut HATA !${e.toString()}");
     }
   }
 }

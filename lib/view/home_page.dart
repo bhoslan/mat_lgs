@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mat_lgs/view/login/login_page.dart';
 import 'package:mat_lgs/viewmodels.dart/user_viewmodel.dart';
 import 'package:provider/provider.dart';
 
@@ -17,6 +18,19 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+              onPressed: () {
+                Provider.of<UserViewModel>(context, listen: false).signOut();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const LoginPage(),
+                  ),
+                );
+              },
+              icon: const Icon(Icons.outbound))
+        ],
         title: const Text('Material App Bar'),
       ),
       body: Center(

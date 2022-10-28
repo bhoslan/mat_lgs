@@ -28,7 +28,7 @@ class UserViewModel with ChangeNotifier implements AuthBaseService {
       _myUser = await _userRepository.currentUser();
       return _myUser;
     } catch (e) {
-      print("UserViewmodel currentUser HATA !${e.toString()}");
+      debugPrint("UserViewmodel currentUser HATA !${e.toString()}");
       return null;
     } finally {
       state = ViewState.idle;
@@ -39,9 +39,11 @@ class UserViewModel with ChangeNotifier implements AuthBaseService {
   Future<bool> isSignOut() async {
     try {
       state = ViewState.busy;
-      return _userRepository.isSignOut();
+      bool result = await _userRepository.isSignOut();
+      _myUser = null;
+      return result;
     } catch (e) {
-      print("UserViewmodel isSignOut HATA !${e.toString()}");
+      debugPrint("UserViewmodel isSignOut HATA !${e.toString()}");
       return false;
     } finally {
       state = ViewState.idle;
@@ -55,8 +57,32 @@ class UserViewModel with ChangeNotifier implements AuthBaseService {
       _myUser = await _userRepository.signInEmailPassword(email, password);
       return _myUser;
     } catch (e) {
-      print("UserViewmodel signInEmailPassword HATA !${e.toString()}");
+      debugPrint("UserViewmodel signInEmailPassword HATA !${e.toString()}");
       return null;
+    } finally {
+      state = ViewState.idle;
+    }
+  }
+
+  @override
+  Future<void> signOut() async {
+    try {
+      state = ViewState.busy;
+      _userRepository.signOut();
+    } catch (e) {
+      debugPrint("UserViewmodel signOut HATA !${e.toString()}");
+    } finally {
+      state = ViewState.idle;
+    }
+  }
+
+  @override
+  Future register(String email, String password ) async {
+    try {
+      state = ViewState.busy;
+      _userRepository.register(email, password );
+    } catch (e) {
+      debugPrint("UserViewmodel register HATA !${e.toString()}");
     } finally {
       state = ViewState.idle;
     }

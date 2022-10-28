@@ -6,13 +6,13 @@ import '../../locator.dart';
 import '../../services/auth_base_service.dart';
 import '../../services/firebase_auth_service.dart';
 
+
 class ForgotPasswordPage extends StatefulWidget {
   ForgotPasswordPage({super.key});
   String title = "Şifremi Unuttum";
   @override
   State<ForgotPasswordPage> createState() => _ForgotPasswordPageState();
 }
-
 class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   AuthBaseService authService = locator<FirebaseAuthService>();
 
@@ -22,6 +22,17 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         centerTitle: true,
+        leading: Builder(
+          builder: (BuildContext context) {
+            return IconButton(
+              icon: const Icon(Icons.arrow_back),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              color: Colors.black,
+            );
+          },
+        ),
         title: Text(
           widget.title,
           style: const TextStyle(

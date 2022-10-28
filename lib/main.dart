@@ -23,9 +23,10 @@ class MainPage extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Bitirme Tezi',
-      home: ChangeNotifierProvider(
-        //Widget tree UserModelView enjekte edildi
-        create: (BuildContext context) => UserViewModel(),
+      home: MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (context) => UserViewModel()),
+        ],
         child: const LandingPage(),
       ),
     );
