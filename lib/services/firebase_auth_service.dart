@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mat_lgs/models/user.dart';
-
 import 'auth_base_service.dart';
 
 class FirebaseAuthService implements AuthBaseService {
@@ -47,8 +46,13 @@ class FirebaseAuthService implements AuthBaseService {
 
   @override
   Future<void> signOut() async {
-    _firebaseAuth.signOut();
+    try {
+      _firebaseAuth.signOut();
     debugPrint("Firebaseden çıkış yapıldı.");
+    } catch (e) {
+      debugPrint("FirebaseAuthService HATA ! ${e.toString()}");
+    }
+    
   }
 
   @override

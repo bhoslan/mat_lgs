@@ -6,12 +6,12 @@ import 'package:mat_lgs/services/auth_base_service.dart';
 
 enum ViewState { idle, busy }
 
-class UserViewModel with ChangeNotifier implements AuthBaseService {
+class UserViewModel extends ChangeNotifier implements AuthBaseService {
   UserViewModel() {
     currentUser();
   }
-  ViewState _state = ViewState.idle;
   final UserRepository _userRepository = locator<UserRepository>();
+  ViewState _state = ViewState.idle;
   MyUser? _myUser;
   MyUser? get myUser => _myUser;
 

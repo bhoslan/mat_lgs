@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:mat_lgs/locator.dart';
 import 'package:mat_lgs/view/login/landing_page.dart';
@@ -12,7 +13,14 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   setUpLocator();
-  runApp(const MainPage());
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(
+        create: (context) => UserViewModel(),
+      )
+    ],
+    child: const MainPage(),
+  ));
 }
 
 class MainPage extends StatelessWidget {
@@ -20,15 +28,10 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Bitirme Tezi',
-      home: MultiProvider(
-        providers: [
-          ChangeNotifierProvider(create: (context) => UserViewModel()),
-        ],
-        child: const LandingPage(),
-      ),
+      home: LandingPage(),
     );
   }
 }
