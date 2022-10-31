@@ -24,6 +24,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
+  final formKey1 = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -52,12 +53,21 @@ class _LoginPageState extends State<LoginPage> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          LoginListTile(
-            email: email,
-            hintText: "E-posta",
-            iconColor: Colors.red,
-            keyboardType: TextInputType.emailAddress,
-            prefixIcon: Icons.email,
+          Form(
+            key: formKey1,
+            child: LoginListTile(
+              email: email,
+              validator: ((value) {
+                if (value == null || value.isEmpty || !value.contains("@")) {
+                  return "Lütfen geçerli email adresi giyiniz";
+                }
+                return null;
+              }),
+              hintText: "E-posta",
+              iconColor: Colors.red,
+              keyboardType: TextInputType.emailAddress,
+              prefixIcon: Icons.email,
+            ),
           ),
           const LoginTextContainer(
             text: "E-Posta",
@@ -99,27 +109,24 @@ class _LoginPageState extends State<LoginPage> {
           LoginButton(
             text: "Giriş Yap",
             onPressed: () async {
-              Provider.of<UserViewModel>(context, listen: false)
-                  .signInEmailPassword(email.text, password.text);
-              MyUser? myUser = await Provider.of<UserViewModel>(context, listen: false).currentUser();
-              if (myUser != null) {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => HomePage(myUser: myUser),
-                  ),
-                );
+              if (formKey1.currentState!.validate()) {
+                Provider.of<UserViewModel>(context, listen: false)
+                    .signInEmailPassword(email.text, password.text);
+                MyUser? myUser =
+                    await Provider.of<UserViewModel>(context, listen: false)
+                        .currentUser();
+                if (myUser != null) {
+                  // ignore: use_build_context_synchronously
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => HomePage(myUser: myUser),
+                    ),
+                  );
+                }
+              } else {
+                debugPrint("validate olmadı");
               }
-
-              ;
-              //   MyUser? myUser =  Provider.of<UserViewModel>(context,listen: false)
-              //       .signInEmailPassword(email.text, password.text) as MyUser?;
-              //   if (myUser != null) {
-              //     Navigator.push(
-              //         context,
-              //         MaterialPageRoute(
-              //             builder: (context) => HomePage(myUser: myUser)));
-              //   }
             },
           ),
           Container(

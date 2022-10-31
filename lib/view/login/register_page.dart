@@ -5,6 +5,8 @@ import 'package:mat_lgs/viewmodels.dart/user_viewmodel.dart';
 import 'package:provider/provider.dart';
 import '../../component/container/login_text_container.dart';
 import '../../component/list-tile/login_listtile.dart';
+import '../../models/user.dart';
+import '../home_page.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -85,9 +87,19 @@ class _RegisterPageState extends State<RegisterPage> {
           ),
           LoginButton(
               text: "Kayıt ol",
-              onPressed: () {
-                Provider.of<UserViewModel>(context, listen: false).register(
+              onPressed: () async{
+                MyUser? myUser = await Provider.of<UserViewModel>(context, listen: false).register(
                     email.text, password.text);
+               if(myUser != null){
+                // ignore: use_build_context_synchronously
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => HomePage(myUser: myUser),
+                  ));
+               }
+               
+                   
               }),
           Container(
             margin: const EdgeInsets.only(left: 60, right: 60),
