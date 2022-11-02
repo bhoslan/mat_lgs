@@ -5,6 +5,7 @@ import 'auth_base_service.dart';
 
 class FirebaseAuthService implements AuthBaseService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  String errorMessage = "";
 
   MyUser? _fromFirebasetoMyUser(User? user) {
     if (user == null) {
@@ -44,10 +45,9 @@ class FirebaseAuthService implements AuthBaseService {
           .then((value) => value.user);
       return _fromFirebasetoMyUser(user);
     } on FirebaseAuthException catch (e) {
-      if (e.toString() == "wrong-password") {
-        return "Yanlış şifre";
-      }
+      return errorMessage = e.message!;
     }
+    
   }
 
   @override

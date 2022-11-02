@@ -27,7 +27,6 @@ class _RegisterPageState extends State<RegisterPage> {
     // final UserViewModel userViewModel = Provider.of(context);
 
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -104,6 +103,7 @@ class _RegisterPageState extends State<RegisterPage> {
             keyboardType: TextInputType.emailAddress,
             obscureText: true,
           ),
+
           const SizedBox(
             height: 10,
           ),

@@ -1,5 +1,7 @@
 import 'package:email_validator/email_validator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mat_lgs/component/button/login_buttons.dart';
 import 'package:mat_lgs/component/container/login_text_container.dart';
 import 'package:mat_lgs/component/list-tile/login_listtile.dart';
@@ -116,20 +118,8 @@ class _LoginPageState extends State<LoginPage> {
             text: "Giriş Yap",
             onPressed: () async {
               //NOT : PASSWORD VALIDATION YAPILACAK !
-              if (formKey1.currentState!.validate() ) {
-                MyUser? myUser =
-                    await Provider.of<UserViewModel>(context, listen: false)
-                        .signInEmailPassword(email.text, password.text);
-
-                if (myUser != null) {
-                  // ignore: use_build_context_synchronously
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => HomePage(myUser: myUser),
-                    ),
-                  );
-                }
+              if (formKey1.currentState!.validate()) {
+                _login(email.toString(), password.toString());
               }
             },
           ),
@@ -167,5 +157,23 @@ class _LoginPageState extends State<LoginPage> {
         ],
       ),
     );
+  }
+
+  _login(String email, String password) async {
+    try {
+      MyUser? myUser = await Provider.of<UserViewModel>(context, listen: false)
+          .signInEmailPassword(email, password);
+      if (myUser != null) {
+        // ignore: use_build_context_synchronously
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => HomePage(myUser: myUser),
+          ),
+        );
+      }
+    } on FirebaseAuthException catch (e) {
+      Fluttertoast.showToast(msg: e.message!, gravity: ToastGravity.TOP);
+    }
   }
 }
