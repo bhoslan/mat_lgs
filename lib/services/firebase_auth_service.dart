@@ -37,22 +37,27 @@ class FirebaseAuthService implements AuthBaseService {
   }
 
   @override
-  Future<MyUser?> signInEmailPassword(email, password) async {
-    User? user = await _firebaseAuth
-        .signInWithEmailAndPassword(email: email, password: password)
-        .then((value) => value.user);
-    return _fromFirebasetoMyUser(user);
+  Future<dynamic> signInEmailPassword(email, password) async {
+    try {
+      User? user = await _firebaseAuth
+          .signInWithEmailAndPassword(email: email, password: password)
+          .then((value) => value.user);
+      return _fromFirebasetoMyUser(user);
+    } on FirebaseAuthException catch (e) {
+      if (e.toString() == "wrong-password") {
+        return "Yanlış şifre";
+      }
+    }
   }
 
   @override
   Future<void> signOut() async {
     try {
       _firebaseAuth.signOut();
-    debugPrint("Firebaseden çıkış yapıldı.");
-    } catch (e) {
+      debugPrint("Firebaseden çıkış yapıldı.");
+    } on FirebaseAuthException catch (e) {
       debugPrint("FirebaseAuthService HATA ! ${e.toString()}");
     }
-    
   }
 
   @override

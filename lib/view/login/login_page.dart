@@ -1,4 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:mat_lgs/component/button/login_buttons.dart';
 import 'package:mat_lgs/component/container/login_text_container.dart';
@@ -8,7 +8,6 @@ import 'package:mat_lgs/view/home_page.dart';
 import 'package:mat_lgs/view/login/register_page.dart';
 import 'package:mat_lgs/viewmodels.dart/user_viewmodel.dart';
 import 'package:provider/provider.dart';
-import '../../locator.dart';
 import '../../models/user.dart';
 import 'forgot_password_page.dart';
 
@@ -25,6 +24,7 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
   final formKey1 = GlobalKey<FormState>();
+  final formKey2 = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -57,12 +57,10 @@ class _LoginPageState extends State<LoginPage> {
             key: formKey1,
             child: LoginListTile(
               email: email,
-              validator: ((value) {
-                if (value == null || value.isEmpty || !value.contains("@")) {
-                  return "Lütfen geçerli email adresi giyiniz";
-                }
-                return null;
-              }),
+              validator: ((value) =>
+                  value != null && !EmailValidator.validate(value)
+                      ? "Geçerli bir email giriniz !"
+                      : null),
               hintText: "E-posta",
               iconColor: Colors.red,
               keyboardType: TextInputType.emailAddress,
@@ -72,13 +70,21 @@ class _LoginPageState extends State<LoginPage> {
           const LoginTextContainer(
             text: "E-Posta",
           ),
-          LoginListTile(
-            email: password,
-            hintText: "Şifre",
-            iconColor: Colors.grey,
-            keyboardType: TextInputType.visiblePassword,
-            prefixIcon: Icons.lock_outline,
-            obscureText: true,
+          Form(
+            key: formKey2,
+            child: LoginListTile(
+              email: password,
+              validator: (value) {
+                value != null && !EmailValidator.validate(value)
+                    ? "Geçerli bir şifre giriniz !"
+                    : null;
+              },
+              hintText: "Şifre",
+              iconColor: Colors.grey,
+              keyboardType: TextInputType.visiblePassword,
+              prefixIcon: Icons.lock_outline,
+              obscureText: true,
+            ),
           ),
           Container(
             margin: const EdgeInsets.only(top: 5, left: 20, right: 20),
@@ -109,12 +115,12 @@ class _LoginPageState extends State<LoginPage> {
           LoginButton(
             text: "Giriş Yap",
             onPressed: () async {
-              if (formKey1.currentState!.validate()) {
-                Provider.of<UserViewModel>(context, listen: false)
-                    .signInEmailPassword(email.text, password.text);
+              //NOT : PASSWORD VALIDATION YAPILACAK !
+              if (formKey1.currentState!.validate() ) {
                 MyUser? myUser =
                     await Provider.of<UserViewModel>(context, listen: false)
-                        .currentUser();
+                        .signInEmailPassword(email.text, password.text);
+
                 if (myUser != null) {
                   // ignore: use_build_context_synchronously
                   Navigator.push(
@@ -124,8 +130,6 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   );
                 }
-              } else {
-                debugPrint("validate olmadı");
               }
             },
           ),
