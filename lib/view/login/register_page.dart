@@ -5,10 +5,9 @@ import 'package:flutter_pw_validator/flutter_pw_validator.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mat_lgs/component/button/login_buttons.dart';
 import 'package:mat_lgs/services/firebase_auth_service.dart';
-import 'package:mat_lgs/viewmodels.dart/user_viewmodel.dart';
-import 'package:provider/provider.dart';
 import '../../component/container/login_text_container.dart';
 import '../../component/list-tile/login_listtile.dart';
+import '../../constants/app/app_constants.dart';
 import '../../models/user.dart';
 import '../home_page.dart';
 
@@ -24,15 +23,13 @@ class _RegisterPageState extends State<RegisterPage> {
   final email = TextEditingController();
   final password = TextEditingController();
   final formKey2 = GlobalKey<FormState>();
-  FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        centerTitle: true,
         leading: Builder(
           builder: (BuildContext context) {
             return IconButton(
@@ -40,20 +37,14 @@ class _RegisterPageState extends State<RegisterPage> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              color: Colors.black,
+              color: Theme.of(context).iconTheme.color,
             );
           },
         ),
-        title: const Text(
-          "Kayıt ol",
-          style: TextStyle(
-            color: Colors.black,
-            fontFamily: "OpenSans",
-            fontSize: 20.0,
-            fontWeight: FontWeight.bold,
-          ),
+        title: Text(
+          ApplicationConstants.registerTitle,
+          style: Theme.of(context).textTheme.titleLarge!,
         ),
-        elevation: 0,
       ),
       body: _buildNickNameEmailPassword(context),
     );
@@ -138,7 +129,7 @@ class _RegisterPageState extends State<RegisterPage> {
           LoginButton(
               text: "Kayıt ol",
               onPressed: () {
-                _register(email.text,password.text);
+                _register(email.text, password.text);
               }),
           Container(
             margin: const EdgeInsets.only(left: 60, right: 60),
@@ -188,13 +179,12 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   _register(String email, String password) async {
-  
     try {
       MyUser? myUser = await _auth
           .signInWithEmailAndPassword(email: email, password: password)
-          .then((value) => value.user).then((value) => FirebaseAuthService().fromFirebasetoMyUser(value));
+          .then((value) => value.user)
+          .then((value) => FirebaseAuthService().fromFirebasetoMyUser(value));
       if (myUser != null) {
-         
         // ignore: use_build_context_synchronously
         Navigator.push(
           context,

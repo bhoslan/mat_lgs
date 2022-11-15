@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:mat_lgs/constants/app/app_constants.dart';
 import 'package:mat_lgs/locator.dart';
 import 'package:mat_lgs/view/login/landing_page.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -22,6 +24,15 @@ void main() async {
   ));
 }
 
+class ProjectColors {
+  static const Color appBarbackGround = Colors.transparent;
+  static const Color title = Colors.transparent;
+}
+
+class FontFamily {
+  static const String titleFontFamily = "OpenSans";
+}
+
 class MainPage extends StatelessWidget {
   const MainPage({super.key});
 
@@ -31,19 +42,24 @@ class MainPage extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData.light().copyWith(
         appBarTheme: const AppBarTheme(
+          systemOverlayStyle: SystemUiOverlayStyle(
+            statusBarIconBrightness: Brightness.dark,
+          ),
           centerTitle: true,
-          backgroundColor: Colors.transparent,
+          backgroundColor: ProjectColors.appBarbackGround,
           elevation: 0,
+          titleTextStyle: TextStyle(
+            color: Colors.black,
+            fontFamily: FontFamily.titleFontFamily,
+            fontWeight: FontWeight.bold,
+          ),
+          iconTheme: IconThemeData(
+            color: ProjectColors.title,
+          ),
         ),
         scaffoldBackgroundColor: Colors.white,
-        textTheme: const TextTheme(
-            titleLarge: TextStyle(
-          color: Colors.black,
-          fontFamily: "OpenSans",
-          fontWeight: FontWeight.bold,
-        )),
       ),
-      title: 'Bitirme Tezi',
+      title: ApplicationConstants.pendingTitle,
       home: const LandingPage(),
     );
   }

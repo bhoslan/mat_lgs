@@ -1,5 +1,3 @@
-import 'package:email_validator/email_validator.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -10,9 +8,6 @@ import 'package:mat_lgs/constants/app/app_constants.dart';
 import 'package:mat_lgs/services/firebase_auth_service.dart';
 import 'package:mat_lgs/view/home_page.dart';
 import 'package:mat_lgs/view/login/register_page.dart';
-import 'package:mat_lgs/viewmodels.dart/user_viewmodel.dart';
-import 'package:provider/provider.dart';
-import '../../models/user.dart';
 import 'forgot_password_page.dart';
 
 void main() => runApp(const LoginPage());
@@ -37,7 +32,7 @@ class _LoginPageState extends State<LoginPage> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text(
-          ApplicationConstants.LOGIN_TITLE,
+          ApplicationConstants.loginTitle,
           style: Theme.of(context).textTheme.titleLarge!,
         ),
       ),
