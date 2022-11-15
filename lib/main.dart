@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:mat_lgs/locator.dart';
 import 'package:mat_lgs/view/login/landing_page.dart';
@@ -28,10 +27,24 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData.light().copyWith(
+        appBarTheme: const AppBarTheme(
+          centerTitle: true,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        ),
+        scaffoldBackgroundColor: Colors.white,
+        textTheme: const TextTheme(
+            titleLarge: TextStyle(
+          color: Colors.black,
+          fontFamily: "OpenSans",
+          fontWeight: FontWeight.bold,
+        )),
+      ),
       title: 'Bitirme Tezi',
-      home: LandingPage(),
+      home: const LandingPage(),
     );
   }
 }

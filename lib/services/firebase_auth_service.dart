@@ -7,7 +7,7 @@ class FirebaseAuthService implements AuthBaseService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   String errorMessage = "";
 
-  MyUser? _fromFirebasetoMyUser(User? user) {
+  MyUser? fromFirebasetoMyUser(User? user) {
     if (user == null) {
       return null;
     } else {
@@ -19,7 +19,7 @@ class FirebaseAuthService implements AuthBaseService {
   Future<MyUser?> currentUser() async {
     try {
       final User? user = _firebaseAuth.currentUser;
-      return _fromFirebasetoMyUser(user);
+      return fromFirebasetoMyUser(user);
     } catch (e) {
       debugPrint("HATA! Current User : $e");
       return null;
@@ -43,7 +43,7 @@ class FirebaseAuthService implements AuthBaseService {
       User? user = await _firebaseAuth
           .signInWithEmailAndPassword(email: email, password: password)
           .then((value) => value.user);
-      return _fromFirebasetoMyUser(user);
+      if(user!=null){return fromFirebasetoMyUser(user);} 
     } on FirebaseAuthException catch (e) {
       return errorMessage = e.message!;
     }
@@ -66,10 +66,8 @@ class FirebaseAuthService implements AuthBaseService {
       UserCredential userCredential = await _firebaseAuth
           .createUserWithEmailAndPassword(email: email, password: password);
     } on FirebaseAuthException catch (e) {
-      if (e.code == "weak-password") {
-        print("Daha güçlü bir parola giriniz!");
-      } else if (e.code == "email-already-in-use") {
-        print("Bu mail adresi zaten kayıtlı!");
+      if (e.code == "email-already-in-use") {
+        throw  Exception(e.toString());
       }
     } catch (e) {
       debugPrint(e.toString());

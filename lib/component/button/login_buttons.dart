@@ -21,11 +21,13 @@ class _LoginButtonState extends State<LoginButton> {
         borderRadius: BorderRadius.circular(30),
       ),
       child: TextButton(
-          onPressed: widget.onPressed,
-          child: Text(
-            widget.text,
-            style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-          )),
+        onPressed: widget.onPressed,
+        child: Text(
+          widget.text,
+          style:
+              const TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+        ),
+      ),
     );
   }
 }

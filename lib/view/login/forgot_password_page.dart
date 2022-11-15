@@ -1,11 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mat_lgs/component/button/login_buttons.dart';
 import 'package:mat_lgs/component/container/login_text_container.dart';
 import 'package:mat_lgs/component/list-tile/login_listtile.dart';
-import '../../locator.dart';
-import '../../services/auth_base_service.dart';
-import '../../services/firebase_auth_service.dart';
-
 
 class ForgotPasswordPage extends StatefulWidget {
   ForgotPasswordPage({super.key});
@@ -13,8 +10,9 @@ class ForgotPasswordPage extends StatefulWidget {
   @override
   State<ForgotPasswordPage> createState() => _ForgotPasswordPageState();
 }
+
 class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
-  AuthBaseService authService = locator<FirebaseAuthService>();
+  final email = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -46,17 +44,46 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
       ),
       body: Column(
         children: [
-          const LoginListTile(
-            hintText: "E-mail",
-            prefixIcon: Icons.email,
+          TextField(
+            controller: email,
+            decoration: const InputDecoration(
+              hintText: "E-mail",
+              prefixIcon: Icon(Icons.email),
+            ),
             keyboardType: TextInputType.emailAddress,
           ),
           const LoginTextContainer(
             text: "E-mail",
           ),
-          LoginButton(text: "Şifreyi Sıfırla", onPressed: () {})
+          LoginButton(
+              text: "Şifreyi Sıfırla",
+              onPressed: () async {
+                //try {
+                //     await _auth.sendPasswordResetEmail(email: email.text);
+                //   } on FirebaseAuthException catch (e) {
+                //     if (e.code == "invalid-email") {
+                //       Fluttertoast.showToast(
+                //           msg: "Geçersiz e-mail !",
+                //           gravity: ToastGravity.TOP);
+                //     }
+                //     if (e.code == "user-not-found") {
+                //       Fluttertoast.showToast(
+                //           msg: "Böyle bir kullanıcı bulunamadı ",
+                //           gravity: ToastGravity.TOP);
+                //     }
+                //   }
+                // })
+                resetPassword();
+              })
         ],
       ),
     );
+  }
+
+  Future resetPassword() async {
+    debugPrint("Öncesi");
+    await FirebaseAuth.instance
+        .sendPasswordResetEmail(email: email.text.trim());
+    debugPrint("Sonrası");
   }
 }
