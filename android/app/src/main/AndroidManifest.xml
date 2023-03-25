@@ -1,10 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.mat_lgs">
    <application
+        android:usesCleartextTraffic="true"
         android:label="mat_lgs"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
-
         <activity
             android:name=".MainActivity"
             android:exported="true"

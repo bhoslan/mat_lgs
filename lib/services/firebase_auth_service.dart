@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:mat_lgs/models/user.dart';
+import 'package:mat_lgs/models/myuser.dart';
 import 'auth_base_service.dart';
 
 class FirebaseAuthService implements AuthBaseService {

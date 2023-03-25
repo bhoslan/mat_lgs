@@ -6,6 +6,7 @@ import 'package:mat_lgs/component/container/login_text_container.dart';
 import 'package:mat_lgs/component/list-tile/login_listtile.dart';
 import 'package:mat_lgs/constants/app/app_constants.dart';
 import 'package:mat_lgs/services/firebase_auth_service.dart';
+import 'package:mat_lgs/utilities/app_padding.dart';
 import 'package:mat_lgs/view/home_page.dart';
 import 'package:mat_lgs/view/login/register_page.dart';
 import 'forgot_password_page.dart';
@@ -41,104 +42,88 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _buildEmailPassword(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          Form(
-            key: formKey1,
-            child: LoginListTile(
-              email: email,
-              // validator: ((value) =>
-              //     value != null && !EmailValidator.validate(value)
-              //         ? "Geçerli bir email giriniz !"
-              //         : null),
-              hintText: "E-posta",
-              iconColor: Colors.red,
-              keyboardType: TextInputType.emailAddress,
-              prefixIcon: Icons.email,
+    final FocusNode focusNodeTextFieldOne = FocusNode();
+    final FocusNode focusNodeTextFieldTwo = FocusNode();
+
+    return Padding(
+      padding: AppPaddings.paddingAll16,
+      child: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Column(
+          children: [
+            Form(
+              key: formKey1,
+              child: LoginListTile(
+                focusnode: focusNodeTextFieldOne,
+                email: email,
+                // validator: ((value) =>
+                //     value != null && !EmailValidator.validate(value)
+                //         ? "Geçerli bir email giriniz !"
+                //         : null),
+                hintText: ApplicationConstants.ePosta,
+                keyboardType: TextInputType.emailAddress,
+                prefixIcon: Icons.email,
+              ),
             ),
-          ),
-          const LoginTextContainer(
-            text: "E-Posta",
-          ),
-          Form(
-            key: formKey2,
-            child: LoginListTile(
-              email: password,
-              hintText: "Şifre",
-              iconColor: Colors.grey,
-              keyboardType: TextInputType.visiblePassword,
-              prefixIcon: Icons.lock_outline,
-              obscureText: true,
+            const Padding(
+              padding: AppPaddings.paddingSymetricV8,
+              child: LoginTextContainer(text: ApplicationConstants.ePosta),
             ),
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 5, left: 20, right: 20),
-            color: Colors.white,
-            child: Row(
+            Form(
+              key: formKey2,
+              child: LoginListTile(
+                focusnode: focusNodeTextFieldTwo,
+                email: password,
+                hintText: ApplicationConstants.password,
+                keyboardType: TextInputType.visiblePassword,
+                prefixIcon: Icons.lock_outline,
+                obscureText: true,
+              ),
+            ),
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text("Şifre",
-                    style: TextStyle(fontWeight: FontWeight.w400)),
-                TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ForgotPasswordPage()),
-                    );
-                  },
-                  child: const Text(
-                    "Şifremi unuttum",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      decoration: TextDecoration.underline,
-                      color: Colors.black,
-                      decorationThickness: 3,
-                    ),
-                  ),
-                )
+                Text(
+                  ApplicationConstants.password,
+                  style: Theme.of(context).textTheme.bodyText2?.copyWith(color: Colors.grey.shade800),
+                ),
+                const _ButtonForgotPassword(),
               ],
             ),
-          ),
-          LoginButton(
-            text: "Giriş Yap",
-            onPressed: () {
-              _login(email.text, password.text);
-            },
-          ),
-          Container(
-            color: Colors.white,
-            margin: const EdgeInsets.only(top: 0),
-            child: Row(
+            Padding(
+              padding: AppPaddings.paddingSymetricV8,
+              child: LoginButton(
+                text: ApplicationConstants.login,
+                onPressed: () {
+                  _login(email.text, password.text);
+                },
+              ),
+            ),
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text("Hesabınız yok mu?"),
+                Text(
+                  ApplicationConstants.isHaveAccount,
+                  style: Theme.of(context).textTheme.bodyText2?.copyWith(color: Colors.grey.shade800),
+                ),
                 TextButton(
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                            builder: (BuildContext context) =>
-                                const RegisterPage()),
+                        MaterialPageRoute(builder: (BuildContext context) => const RegisterPage()),
                       );
                     },
-                    child: const Text("Kayıt ol",
-                        style: TextStyle(
-                            decoration: TextDecoration.underline,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black))),
+                    child: Text(
+                      ApplicationConstants.registerTitle,
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyText2
+                          ?.copyWith(decoration: TextDecoration.underline, color: Colors.blue),
+                    )),
               ],
             ),
-          ),
-          Container(
-            color: Colors.white,
-            margin: const EdgeInsets.only(top: 0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-            ),
-          )
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -157,7 +142,7 @@ class _LoginPageState extends State<LoginPage> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => HomePage(myUser: myUser),
+            builder: (context) => HomePage(),
           ),
         );
       }
@@ -165,12 +150,33 @@ class _LoginPageState extends State<LoginPage> {
       if (e.code == "wrong-password") {
         Fluttertoast.showToast(msg: "Yanlış şifre!", gravity: ToastGravity.TOP);
       } else if (e.code == "invalid-email") {
-        Fluttertoast.showToast(
-            msg: "Geçersiz e-mail !", gravity: ToastGravity.TOP);
+        Fluttertoast.showToast(msg: "Geçersiz e-mail !", gravity: ToastGravity.TOP);
       } else if (e.code == "user-not-found") {
-        Fluttertoast.showToast(
-            msg: "Geçersiz e-mail ya da şifre !", gravity: ToastGravity.TOP);
+        Fluttertoast.showToast(msg: "Geçersiz e-mail ya da şifre !", gravity: ToastGravity.TOP);
       }
     }
+  }
+}
+
+class _ButtonForgotPassword extends StatelessWidget {
+  const _ButtonForgotPassword({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      child: Text(
+        ApplicationConstants.forgotPasswordTitle,
+        style:
+            Theme.of(context).textTheme.bodyText2?.copyWith(decoration: TextDecoration.underline, color: Colors.blue),
+      ),
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => ForgotPasswordPage()),
+        );
+      },
+    );
   }
 }

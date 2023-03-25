@@ -13,7 +13,6 @@ class _LoginButtonState extends State<LoginButton> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: 30),
       width: 150,
       height: 60,
       decoration: BoxDecoration(
@@ -24,8 +23,7 @@ class _LoginButtonState extends State<LoginButton> {
         onPressed: widget.onPressed,
         child: Text(
           widget.text,
-          style:
-              const TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+          style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
         ),
       ),
     );

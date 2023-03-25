@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:mat_lgs/locator.dart';
-import 'package:mat_lgs/models/user.dart';
+import 'package:mat_lgs/models/myuser.dart';
 import 'package:mat_lgs/services/auth_base_service.dart';
 import 'package:mat_lgs/services/fake_auth_service.dart';
 import 'package:mat_lgs/services/firebase_auth_service.dart';

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mat_lgs/utilities/app_colors.dart';
 
 class LoginListTile extends StatefulWidget {
   final TextEditingController? email;
@@ -10,19 +11,20 @@ class LoginListTile extends StatefulWidget {
   final ValueChanged<String>? onSubmitted;
   final String? errorText;
   final FormFieldValidator<String?>? validator;
- 
-  const   LoginListTile({
-    super.key,
-    this.email,
-    this.keyboardType,
-    this.prefixIcon,
-    this.iconColor,
-    this.hintText,
-    this.obscureText = false,
-    this.onSubmitted,
-    this.errorText,
-    this.validator,
-  });
+  final FocusNode? focusnode;
+
+  const LoginListTile(
+      {super.key,
+      this.email,
+      this.keyboardType,
+      this.prefixIcon,
+      this.iconColor,
+      this.hintText,
+      this.obscureText = false,
+      this.onSubmitted,
+      this.errorText,
+      this.validator,
+      this.focusnode});
 
   @override
   State<LoginListTile> createState() => _LoginListTileState();
@@ -32,8 +34,11 @@ class _LoginListTileState extends State<LoginListTile> {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: TextFormField(
-        validator: widget.validator,
+      contentPadding: EdgeInsets.zero,
+      title: TextField(
+        style: TextStyle(color: ApplicationColors.appBarbackGroundColor),
+        focusNode: widget.focusnode,
+        //validator: widget.validator,
         controller: widget.email,
         keyboardType: widget.keyboardType,
         decoration: InputDecoration(
@@ -44,8 +49,6 @@ class _LoginListTileState extends State<LoginListTile> {
             errorText: widget.errorText,
             hintText: widget.hintText),
         obscureText: widget.obscureText,
-        
-        
       ),
     );
   }

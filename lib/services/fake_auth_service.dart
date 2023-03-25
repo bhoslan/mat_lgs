@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mat_lgs/models/user.dart';
+import 'package:mat_lgs/models/myuser.dart';
 import 'package:mat_lgs/services/auth_base_service.dart';
 
 class FakeAuthService implements AuthBaseService {

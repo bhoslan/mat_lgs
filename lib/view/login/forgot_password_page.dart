@@ -4,6 +4,7 @@ import 'package:mat_lgs/component/button/login_buttons.dart';
 import 'package:mat_lgs/component/container/login_text_container.dart';
 
 import '../../constants/app/app_constants.dart';
+import '../../utilities/app_padding.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
   ForgotPasswordPage({super.key});
@@ -26,7 +27,6 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              color: Colors.black,
             );
           },
         ),
@@ -36,48 +36,54 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         ),
         elevation: 0, //AppBar'ın arka planını beyaz yapar.
       ),
-      body: Column(
-        children: [
-          TextField(
-            controller: email,
-            decoration: const InputDecoration(
-              hintText: "E-mail",
-              prefixIcon: Icon(Icons.email),
-            ),
-            keyboardType: TextInputType.emailAddress,
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            children: [
+              TextField(
+                controller: email,
+                decoration: const InputDecoration(
+                  hintText: "E-mail",
+                  prefixIcon: Icon(Icons.email),
+                ),
+                keyboardType: TextInputType.emailAddress,
+              ),
+              const Padding(
+                padding: AppPaddings.paddingSymetricV8,
+                child: LoginTextContainer(text: ApplicationConstants.ePosta),
+              ),
+              LoginButton(
+                  text: "Şifreyi Sıfırla",
+                  onPressed: () async {
+                    //try {
+                    //     await _auth.sendPasswordResetEmail(email: email.text);
+                    //   } on FirebaseAuthException catch (e) {
+                    //     if (e.code == "invalid-email") {
+                    //       Fluttertoast.showToast(
+                    //           msg: "Geçersiz e-mail !",
+                    //           gravity: ToastGravity.TOP);
+                    //     }
+                    //     if (e.code == "user-not-found") {
+                    //       Fluttertoast.showToast(
+                    //           msg: "Böyle bir kullanıcı bulunamadı ",
+                    //           gravity: ToastGravity.TOP);
+                    //     }
+                    //   }
+                    // })
+                    resetPassword();
+                  })
+            ],
           ),
-          const LoginTextContainer(
-            text: "E-mail",
-          ),
-          LoginButton(
-              text: "Şifreyi Sıfırla",
-              onPressed: () async {
-                //try {
-                //     await _auth.sendPasswordResetEmail(email: email.text);
-                //   } on FirebaseAuthException catch (e) {
-                //     if (e.code == "invalid-email") {
-                //       Fluttertoast.showToast(
-                //           msg: "Geçersiz e-mail !",
-                //           gravity: ToastGravity.TOP);
-                //     }
-                //     if (e.code == "user-not-found") {
-                //       Fluttertoast.showToast(
-                //           msg: "Böyle bir kullanıcı bulunamadı ",
-                //           gravity: ToastGravity.TOP);
-                //     }
-                //   }
-                // })
-                resetPassword();
-              })
-        ],
+        ),
       ),
     );
   }
 
   Future resetPassword() async {
     debugPrint("Öncesi");
-    await FirebaseAuth.instance
-        .sendPasswordResetEmail(email: email.text.trim());
+    await FirebaseAuth.instance.sendPasswordResetEmail(email: email.text.trim());
     debugPrint("Sonrası");
   }
 }
