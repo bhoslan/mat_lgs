@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mat_lgs/constants/app/app_constants.dart';
+import 'package:mat_lgs/provider/color_control.dart';
+import 'package:mat_lgs/provider/test_true_false_number.dart';
+import 'package:mat_lgs/provider/true_false_number.dart';
 import 'package:mat_lgs/utilities/app_colors.dart';
 import 'package:mat_lgs/locator.dart';
 import 'package:mat_lgs/view/login/landing_page.dart';
@@ -32,47 +35,57 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData.light().copyWith(
-        appBarTheme: AppBarTheme(
-          actionsIconTheme: const IconThemeData(color: ApplicationColors.actionsIconThemeColor),
-          systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarColor: ApplicationColors.appBarbackGroundColor,
-            //statusBarIconBrightness: Brightness.light,
-          ),
-          centerTitle: false,
-          backgroundColor: ApplicationColors.appBarbackGroundColor,
-          elevation: _elevation,
-          titleTextStyle: const TextStyle(
-            color: ApplicationColors.titleColor,
-            fontFamily: ApplicationConstants.titleFontFamily,
-            fontWeight: FontWeight.bold,
-            fontSize: 16,
-          ),
-          iconTheme: const IconThemeData(
-            color: ApplicationColors.actionsIconThemeColor,
-          ),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => TestTrueFalseNumber(),
         ),
-        textTheme: const TextTheme().copyWith(
-          titleLarge: const TextStyle(
-            color: ApplicationColors.titleColor,
-          ),
-          labelLarge: const TextStyle(
-            color: Colors.black,
-          ),
+        ChangeNotifierProvider<TrueFalseNumber>(create: (_) => TrueFalseNumber()),
+        ChangeNotifierProvider<ColorControl>(create: (_) => ColorControl()),
 
-          // bodyText2: TextStyle(backgroundColor: Colors.grey), HATA veriyor araştır.
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData.light().copyWith(
+          appBarTheme: AppBarTheme(
+            actionsIconTheme: const IconThemeData(color: ApplicationColors.actionsIconThemeColor),
+            systemOverlayStyle: SystemUiOverlayStyle(
+              statusBarColor: ApplicationColors.appBarbackGroundColor,
+              //statusBarIconBrightness: Brightness.light,
+            ),
+            centerTitle: false,
+            backgroundColor: ApplicationColors.appBarbackGroundColor,
+            elevation: _elevation,
+            titleTextStyle: const TextStyle(
+              color: ApplicationColors.titleColor,
+              fontFamily: ApplicationConstants.titleFontFamily,
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+            ),
+            iconTheme: const IconThemeData(
+              color: ApplicationColors.actionsIconThemeColor,
+            ),
+          ),
+          textTheme: const TextTheme().copyWith(
+            titleLarge: const TextStyle(
+              color: ApplicationColors.titleColor,
+            ),
+            labelLarge: const TextStyle(
+              color: Colors.black,
+            ),
+
+            // bodyText2: TextStyle(backgroundColor: Colors.grey), HATA veriyor araştır.
+          ),
+          scaffoldBackgroundColor: ApplicationColors.scaffoldBackGroundColor,
+          // textButtonTheme:
+          //     TextButtonThemeData(style: ButtonStyle(padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.zero))),
+          iconTheme: const IconThemeData(
+            color: ApplicationColors.titleColor,
+          ),
         ),
-        scaffoldBackgroundColor: ApplicationColors.scaffoldBackGroundColor,
-        // textButtonTheme:
-        //     TextButtonThemeData(style: ButtonStyle(padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.zero))),
-        iconTheme: const IconThemeData(
-          color: ApplicationColors.titleColor,
-        ),
+        title: ApplicationConstants.pendingTitle,
+        home: const LandingPage(),
       ),
-      title: ApplicationConstants.pendingTitle,
-      home: const LandingPage(),
     );
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mat_lgs/constants/app/app_constants.dart';
 import 'package:mat_lgs/view/test/test_page1.dart';
-import 'package:mat_lgs/view/trueFalse/true_false_page1.dart';
+import 'package:mat_lgs/view/trueFalse/true_false_page.dart';
 import '../../component/custom_drawer_widget.dart';
 
 class TrueFalseInfoPage extends StatefulWidget {
@@ -17,7 +17,6 @@ class _TrueFalseInfoPageState extends State<TrueFalseInfoPage> {
     return Scaffold(
       drawer: CustomDrawer(),
       appBar: AppBar(
-        title: const Text(ApplicationConstants.titleMathTests),
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(30),
           child: Row(
@@ -49,14 +48,14 @@ class _TrueFalseInfoPageState extends State<TrueFalseInfoPage> {
           CustomButtonTapCardWidget(
             title: "Çarpanlar ve Katlar",
             onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) => const TrueFalsePage1()));
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => const TrueFalsePage()));
             },
           ),
           const CustomButtonTapCardWidget(
             title: "Ebob Ekok",
           ),
           const CustomButtonTapCardWidget(
-            title: "  Aralarında Asal Sayılar",
+            title: "Aralarında Asal Sayılar",
           ),
           const CustomButtonTapCardWidget(
             title: "Üslü İfadeler",

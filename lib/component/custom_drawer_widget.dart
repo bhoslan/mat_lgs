@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:mat_lgs/view/general_state.dart';
 import 'package:mat_lgs/view/home_page.dart';
 import 'package:mat_lgs/view/login/login_page.dart';
 
@@ -122,7 +123,9 @@ class CustomDrawer extends StatelessWidget {
               "Genel Durum",
               style: Theme.of(context).textTheme.labelLarge,
             ),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const GeneralState()));
+            },
           ),
           ListTile(
             leading: SizedBox(

@@ -116,7 +116,7 @@ class _TimerCountdownState extends State<TimerCountdown> {
         widget.onEnd!();
       }
     } else {
-      timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      timer = Timer.periodic(const Duration(seconds: 1), (timer) {
         difference = widget.endTime.difference(DateTime.now());
         setState(() {
           countdownDays = _durationToStringDays(difference);
@@ -155,7 +155,7 @@ class _TimerCountdownState extends State<TimerCountdown> {
               style: widget.colonsTextStyle,
             ),
             if (widget.enableDescriptions)
-              SizedBox(
+              const SizedBox(
                 height: 5,
               ),
             if (widget.enableDescriptions)
@@ -183,7 +183,7 @@ class _TimerCountdownState extends State<TimerCountdown> {
           style: widget.timeTextStyle,
         ),
         if (widget.enableDescriptions)
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
         if (widget.enableDescriptions)
@@ -206,7 +206,7 @@ class _TimerCountdownState extends State<TimerCountdown> {
           style: widget.timeTextStyle,
         ),
         if (widget.enableDescriptions)
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
         if (widget.enableDescriptions)
@@ -229,7 +229,7 @@ class _TimerCountdownState extends State<TimerCountdown> {
           style: widget.timeTextStyle,
         ),
         if (widget.enableDescriptions)
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
         if (widget.enableDescriptions)
@@ -252,7 +252,7 @@ class _TimerCountdownState extends State<TimerCountdown> {
           style: widget.timeTextStyle,
         ),
         if (widget.enableDescriptions)
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
         if (widget.enableDescriptions)

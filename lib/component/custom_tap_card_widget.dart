@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CustomTapCardWidget extends StatefulWidget {
-  CustomTapCardWidget({Key? key, required this.text}) : super(key: key);
+  const CustomTapCardWidget({Key? key, required this.text}) : super(key: key);
   final String text;
 
   @override
