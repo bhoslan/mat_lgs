@@ -1,5 +1,7 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+
+
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class TestTrueFalseNumber extends ChangeNotifier {
   int trueNumber1 = 0;
@@ -13,7 +15,7 @@ class TestTrueFalseNumber extends ChangeNotifier {
   double get netNumber => calculateNet();
   bool get isShowAnswer => isShowAnswer1;
 
-  setIsShowAnswer (){
+  setIsShowAnswer() {
     isShowAnswer1 = !isShowAnswer1;
     notifyListeners();
   }
@@ -49,5 +51,12 @@ class TestTrueFalseNumber extends ChangeNotifier {
       message = "Bu konuda oldukça iyisiniz. Daha çok soru çözerek hız kazanabilirsiniz.";
     }
     return message;
+  }
+
+  void saveTestResult() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setInt("true", trueNumber1);
+    prefs.setInt("false", falseNumber1);
+    prefs.setDouble("net", netNumber);
   }
 }

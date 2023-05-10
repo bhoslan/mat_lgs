@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mat_lgs/constants/app/app_constants.dart';
 import 'package:mat_lgs/view/test/test_page1.dart';
+import 'package:mat_lgs/view/test/test_page2.dart';
 import '../../component/custom_drawer_widget.dart';
 
 class TestInfoPage extends StatefulWidget {
@@ -51,8 +52,11 @@ class _TestInfoPageState extends State<TestInfoPage> {
               Navigator.of(context).push(MaterialPageRoute(builder: (context) => const TestPage1()));
             },
           ),
-          const CustomButtonTapCardWidget(
+          CustomButtonTapCardWidget(
             title: "Test 2 - Ebob Ekok",
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => const TestPage2()));
+            },
           ),
           const CustomButtonTapCardWidget(
             title: "Test 3 - Aralarında Asal Sayılar",

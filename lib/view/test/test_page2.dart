@@ -1,25 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:mat_lgs/component/custom_drawer_widget.dart';
 import 'package:mat_lgs/component/options_button_widget.dart';
+import 'package:mat_lgs/component/options_button_widget_test2.dart';
 import 'package:mat_lgs/provider/test_true_false_number.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:provider/provider.dart';
 
-class TestPage1 extends StatefulWidget {
-  const TestPage1({super.key});
+import '../../provider/test_true_false_number2.dart';
+
+class TestPage2 extends StatefulWidget {
+  const TestPage2({super.key});
 
   @override
-  State<TestPage1> createState() => _TestPage1State();
+  State<TestPage2> createState() => _TestPage2State();
 }
 
-class _TestPage1State extends State<TestPage1> {
+class _TestPage2State extends State<TestPage2> {
   @override
   Widget build(BuildContext context) {
-    return Consumer<TestTrueFalseNumber>(
+    return Consumer<TestTrueFalseNumber2>(
       builder: (context, providerObject, child) => WillPopScope(
         onWillPop: () async {
-          providerObject.resetTest();
-          providerObject.setIsShowAnswer();
+          providerObject.resetTest2();
+          providerObject.setIsShowAnswer2();
           return true;
         },
         child: Scaffold(
@@ -40,9 +43,9 @@ class _TestPage1State extends State<TestPage1> {
                             children: [
                               Row(
                                 children: [
-                                  const OptionsButtonWidget(correctAnswer: "A", questionNumber: "1"),
+                                  const OptionsButtonWidgetTest2(correctAnswer: "A", questionNumber: "1"),
                                   SizedBox(width: MediaQuery.of(context).size.width / 8),
-                                  const OptionsButtonWidget(correctAnswer: "B", questionNumber: "2"),
+                                  const OptionsButtonWidgetTest2(correctAnswer: "B", questionNumber: "2"),
                                 ],
                               ),
                             ],
@@ -52,9 +55,9 @@ class _TestPage1State extends State<TestPage1> {
                           ),
                           Row(
                             children: [
-                              const OptionsButtonWidget(correctAnswer: "C", questionNumber: "3"),
+                              const OptionsButtonWidgetTest2(correctAnswer: "C", questionNumber: "3"),
                               SizedBox(width: MediaQuery.of(context).size.width / 8),
-                              const OptionsButtonWidget(correctAnswer: "D", questionNumber: "4"),
+                              const OptionsButtonWidgetTest2(correctAnswer: "D", questionNumber: "4"),
                             ],
                           ),
                           const SizedBox(
@@ -62,9 +65,9 @@ class _TestPage1State extends State<TestPage1> {
                           ),
                           Row(
                             children: [
-                              const OptionsButtonWidget(correctAnswer: "A", questionNumber: "5"),
+                              const OptionsButtonWidgetTest2(correctAnswer: "A", questionNumber: "5"),
                               SizedBox(width: MediaQuery.of(context).size.width / 8),
-                              const OptionsButtonWidget(correctAnswer: "B", questionNumber: "6"),
+                              const OptionsButtonWidgetTest2(correctAnswer: "B", questionNumber: "6"),
                             ],
                           ),
                         ],
@@ -74,7 +77,7 @@ class _TestPage1State extends State<TestPage1> {
                   children: [
                     Expanded(
                       flex: 3,
-                      child: Consumer<TestTrueFalseNumber>(builder: (context, providerObject, child) {
+                      child: Consumer<TestTrueFalseNumber2>(builder: (context, providerObject, child) {
                         return ElevatedButton(
                             style: ButtonStyle(
                                 backgroundColor: MaterialStateProperty.all(Colors.amber),
@@ -82,8 +85,8 @@ class _TestPage1State extends State<TestPage1> {
                                     RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)))),
                             child: const Text("Sonuçları Göster"),
                             onPressed: () {
-                              providerObject.setIsShowAnswer();
-                              providerObject.saveTestResult();
+                              providerObject.setIsShowAnswer2();
+                              providerObject.saveTestResult2();
                               setState(() {});
                               customShowDialog(context, providerObject);
                               // final providerObject2 = Provider.of<TrueFalseNumber>(context, listen: false);
@@ -99,7 +102,7 @@ class _TestPage1State extends State<TestPage1> {
     );
   }
 
-  Future<dynamic> customShowDialog(BuildContext context, TestTrueFalseNumber providerObject) {
+  Future<dynamic> customShowDialog(BuildContext context, TestTrueFalseNumber2 providerObject) {
     return showDialog(
       context: context,
       builder: ((context) => AlertDialog(
@@ -130,15 +133,15 @@ class _TestPage1State extends State<TestPage1> {
                     TableRow(
                       children: [
                         Center(
-                          child: Text("${providerObject.trueNumber}",
+                          child: Text("${providerObject.trueNumber2}",
                               style: const TextStyle(
                                 color: Colors.amber,
                               ),
                               textAlign: TextAlign.center),
                         ),
-                        Text("${providerObject.falseNumber}",
+                        Text("${providerObject.falseNumber2}",
                             style: const TextStyle(color: Colors.amber), textAlign: TextAlign.center),
-                        Text("${providerObject.calculateNet()}",
+                        Text("${providerObject.calculateNet2()}",
                             style: const TextStyle(color: Colors.amber), textAlign: TextAlign.center),
                       ],
                     ),
@@ -148,7 +151,7 @@ class _TestPage1State extends State<TestPage1> {
                   height: 8,
                 ),
                 Center(
-                  child: Text(providerObject.resultMessage(),
+                  child: Text(providerObject.resultMessage2(),
                       style: const TextStyle(color: Colors.amber, fontStyle: FontStyle.italic),
                       textAlign: TextAlign.center),
                 ),

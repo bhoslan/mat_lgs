@@ -31,8 +31,8 @@ environment:
 dependencies:
   cupertino_icons: ^1.0.2
   email_validator: ^2.1.17
-  firebase_auth: ^3.11.2
-  firebase_core: ^1.24.0
+  firebase_auth: ^4.5.0
+  firebase_core: ^2.11.0
   flutter:
     sdk: flutter
   flutter_pw_validator: ^1.4.2
@@ -46,7 +46,7 @@ dependencies:
   get: ^4.6.3
   stop_watch_timer: ^2.0.0
   flutter_timer_countdown: ^1.0.5
-  
+  shared_preferences: ^2.1.1
 
 dev_dependencies:
   flutter_lints: ^2.0.0

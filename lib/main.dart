@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:mat_lgs/constants/app/app_constants.dart';
 import 'package:mat_lgs/provider/color_control.dart';
 import 'package:mat_lgs/provider/test_true_false_number.dart';
+import 'package:mat_lgs/provider/test_true_false_number2.dart';
 import 'package:mat_lgs/provider/true_false_number.dart';
 import 'package:mat_lgs/utilities/app_colors.dart';
 import 'package:mat_lgs/locator.dart';
@@ -42,7 +43,7 @@ class MainPage extends StatelessWidget {
         ),
         ChangeNotifierProvider<TrueFalseNumber>(create: (_) => TrueFalseNumber()),
         ChangeNotifierProvider<ColorControl>(create: (_) => ColorControl()),
-
+        ChangeNotifierProvider<TestTrueFalseNumber2>( create: (context) => TestTrueFalseNumber2(),)
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
