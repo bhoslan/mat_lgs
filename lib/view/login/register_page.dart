@@ -6,7 +6,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mat_lgs/component/button/login_buttons.dart';
 import 'package:mat_lgs/services/firebase_auth_service.dart';
 import 'package:mat_lgs/utilities/app_padding.dart';
-import 'package:mat_lgs/view/login/login_page.dart';
 import '../../component/container/login_text_container.dart';
 import '../../component/list-tile/login_listtile.dart';
 import '../../constants/app/app_constants.dart';

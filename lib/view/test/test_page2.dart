@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mat_lgs/component/custom_drawer_widget.dart';
-import 'package:mat_lgs/component/options_button_widget.dart';
 import 'package:mat_lgs/component/options_button_widget_test2.dart';
-import 'package:mat_lgs/provider/test_true_false_number.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:provider/provider.dart';
 

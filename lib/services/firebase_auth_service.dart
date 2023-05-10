@@ -63,6 +63,7 @@ class FirebaseAuthService implements AuthBaseService {
   @override
   Future register(email, password) async {
     try {
+      // ignore: unused_local_variable
       UserCredential userCredential = await _firebaseAuth
           .createUserWithEmailAndPassword(email: email, password: password);
     } on FirebaseAuthException catch (e) {

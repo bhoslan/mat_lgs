@@ -6,6 +6,7 @@ import 'package:mat_lgs/component/container/login_text_container.dart';
 import '../../constants/app/app_constants.dart';
 import '../../utilities/app_padding.dart';
 
+// ignore: must_be_immutable
 class ForgotPasswordPage extends StatefulWidget {
   ForgotPasswordPage({super.key});
   String title = "Şifremi Unuttum";
