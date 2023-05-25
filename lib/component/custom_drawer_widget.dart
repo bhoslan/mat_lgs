@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:mat_lgs/general_info.dart';
-import 'package:mat_lgs/view/general_state.dart';
+import 'package:mat_lgs/view/generalInfo/general_info.dart';
+import 'package:mat_lgs/view/generalState/general_state.dart';
 import 'package:mat_lgs/view/home_page.dart';
 import 'package:mat_lgs/view/login/login_page.dart';
 import 'package:mat_lgs/view/test/test_info_page.dart';
@@ -25,21 +25,22 @@ class CustomDrawer extends StatelessWidget {
             height: 150,
             color: Colors.blueGrey.shade900,
             child: DrawerHeader(
-                child: Align(
-              alignment: Alignment.centerLeft,
-              child: SizedBox(
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: SizedBox(
                   width: 75,
                   height: 75,
                   child: Image.asset(
                     "assets/images/goal2.png",
-                  )),
-            )),
+                  ),
+                ),
+              ),
+            ),
           ),
           ListTile(
             leading: const Icon(
               Icons.home,
               size: 25,
-              //color: Colors.black,
             ),
             title: Text(
               "Anasayfa",
@@ -50,7 +51,7 @@ class CustomDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: SizedBox(
+            leading: const SizedBox(
                 width: 24,
                 height: 24,
                 child: Icon(
@@ -66,12 +67,11 @@ class CustomDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: SizedBox(
+            leading: const SizedBox(
               width: 24,
               height: 24,
               child: Icon(
                 Icons.radio_button_checked,
-                //scolor: Colors.black,
               ),
             ),
             title: Text(
@@ -83,22 +83,20 @@ class CustomDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: SizedBox(
+            leading: const SizedBox(
                 width: 24,
                 height: 24,
                 child: Row(
                   children: [
-                    Container(
+                    SizedBox(
                       width: 16,
                       height: 16,
                       child: Icon(Icons.done),
-                      //color: Colors.black,
                     ),
-                    Container(
+                    SizedBox(
                       width: 8,
                       height: 8,
                       child: Icon(Icons.close),
-                      //color: Colors.black,
                     )
                   ],
                 )),
@@ -110,34 +108,6 @@ class CustomDrawer extends StatelessWidget {
               Navigator.push(context, MaterialPageRoute(builder: (context) => const TrueFalseInfoPage()));
             },
           ),
-          // ListTile(
-          //   leading: SizedBox(
-          //       width: 24,
-          //       height: 24,
-          //       child: Image.asset(
-          //         "assets/images/openbook.png",
-          //         color: Colors.grey,
-          //       )),
-          //   title: Text(
-          //     "2020 Örnek Sorular",
-          //     style: Theme.of(context).textTheme.labelLarge,
-          //   ),
-          //   onTap: () {},
-          // ),
-          // ListTile(
-          //   leading: SizedBox(
-          //       width: 24,
-          //       height: 24,
-          //       child: Image.asset(
-          //         "assets/images/openbook2.png",
-          //         color: Colors.grey,
-          //       )),
-          //   title: Text(
-          //     "2021 Örnek Sorular",
-          //     style: Theme.of(context).textTheme.labelLarge,
-          //   ),
-          //   onTap: () {},
-          // ),
           ListTile(
             leading: SizedBox(
                 width: 24,
@@ -155,13 +125,7 @@ class CustomDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: SizedBox(
-                width: 24,
-                height: 24,
-                child: Image.asset(
-                  "assets/images/information.png",
-                  color: Colors.grey,
-                )),
+            leading: const SizedBox(width: 24, height: 24, child: Icon(Icons.info)),
             title: Text(
               "Genel Bilgiler",
               style: Theme.of(context).textTheme.labelLarge,

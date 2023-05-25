@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 
-import 'component/custom_drawer_widget.dart';
+import '../../component/custom_drawer_widget.dart';
 
 class GeneralInfo extends StatefulWidget {
   const GeneralInfo({super.key});

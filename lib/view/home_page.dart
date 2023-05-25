@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:mat_lgs/constants/app/app_constants.dart';
 import 'package:mat_lgs/utilities/app_padding.dart';
 import 'package:mat_lgs/utilities/app_styles.dart';
-import 'package:mat_lgs/view/exam_tips.dart';
+import 'package:mat_lgs/view/examTips/exam_tips.dart';
 import 'package:mat_lgs/view/newStyleTest/newstyle_test_info_page.dart';
 import 'package:mat_lgs/view/test/test_info_page.dart';
 import 'package:mat_lgs/view/trueFalse/true_false_info_page.dart';
 import 'package:mat_lgs/view/video/video_info_page.dart';
 import '../component/custom_drawer_widget.dart';
-import '../count_down_timer.dart';
-import '../general_info.dart';
-import 'general_state.dart';
+import '../component/count_down_timer.dart';
+import 'generalInfo/general_info.dart';
+import 'generalState/general_state.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

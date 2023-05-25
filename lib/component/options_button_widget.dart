@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:mat_lgs/provider/test_true_false_number.dart';
 import 'package:provider/provider.dart';
@@ -51,7 +52,9 @@ class _OptionsButtonWidgetState extends State<OptionsButtonWidget> {
                           containerColorA = Colors.red;
                         }
 
-                        print("Doğru :${providerObject.trueNumber} Yanlış :${providerObject.falseNumber1}");
+                        if (kDebugMode) {
+                          print("Doğru :${providerObject.trueNumber} Yanlış :${providerObject.falseNumber1}");
+                        }
                       },
                 child: const Text(
                   "A",
@@ -85,7 +88,9 @@ class _OptionsButtonWidgetState extends State<OptionsButtonWidget> {
                             containerColorB = Colors.red;
                           }
 
-                          print("Doğru :${nesne.trueNumber} Yanlış :${nesne.falseNumber1}");
+                          if (kDebugMode) {
+                            print("Doğru :${nesne.trueNumber} Yanlış :${nesne.falseNumber1}");
+                          }
                         },
                   child: const Text(
                     "B",
@@ -118,7 +123,9 @@ class _OptionsButtonWidgetState extends State<OptionsButtonWidget> {
                             });
                           }
 
-                          print("Doğru :${nesne.trueNumber} Yanlış :${nesne.falseNumber1}");
+                          if (kDebugMode) {
+                            print("Doğru :${nesne.trueNumber} Yanlış :${nesne.falseNumber1}");
+                          }
                         },
                   child: const Text(
                     "C",
@@ -149,7 +156,9 @@ class _OptionsButtonWidgetState extends State<OptionsButtonWidget> {
                             containerColorD = Colors.red;
                           }
 
-                          print("Doğru :${nesne.trueNumber} Yanlış :${nesne.falseNumber1}");
+                          if (kDebugMode) {
+                            print("Doğru :${nesne.trueNumber} Yanlış :${nesne.falseNumber1}");
+                          }
                         },
                   child: const Text(
                     "D",
