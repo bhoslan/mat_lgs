@@ -30,7 +30,7 @@ class TestTrueFalseNumber2 extends ChangeNotifier {
   }
 
   double calculateNet2() {
-    net = trueNumber2 - falseNumber2 / 4;
+    net = double.parse((trueNumber2 - falseNumber2 / 3).toStringAsFixed(2));
     return net;
   }
 
@@ -53,11 +53,9 @@ class TestTrueFalseNumber2 extends ChangeNotifier {
   }
 
   void saveTestResult2() async {
-    final prefs2 = await SharedPreferences.getInstance();
-    prefs2.reload();
-    prefs2.setInt("true2", trueNumber2);
-    prefs2.setInt("false2", falseNumber2);
-    prefs2.setDouble("net2", netNumber);
-    
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setInt("true2", trueNumber2);
+    prefs.setInt("false2", falseNumber2);
+    prefs.setDouble("net2", netNumber);
   }
 }

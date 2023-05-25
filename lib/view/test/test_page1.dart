@@ -159,7 +159,7 @@ class _TestPage1State extends State<TestPage1> {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: const Center(child: Text("KAPAT", style: const TextStyle(color: Colors.amber))),
+                child: const Center(child: Text("KAPAT", style: TextStyle(color: Colors.amber))),
               ),
             ],
           )),

@@ -1,5 +1,4 @@
 class ApplicationConstants {
-  // ignore: constant_identifier_names
   static const String loginTitle = "Giriş";
   static const String ePosta = "E-Posta";
   static const String registerTitle = "Kayıt ol";
@@ -11,9 +10,11 @@ class ApplicationConstants {
   static const String login = "Giriş Yap";
   static const String titleMathTests = "Matematik Testleri";
   static const String titleExamTips = "Sınav Tavsiyeleri";
+  static const String homePage = "Anasayfa";
+  static const String timeRemaining = "LGS 2023'E KALAN SÜRE";
+
   static const String tips1 =
       "   Her insan hayatında çeşitli sınavlara girmiştir. Sınava girenler her ne kadar soğukkanlı olurlarsa olsunlar muhakkak heyecan ve stres yaşarlar. Bu durum insanlara bazen huzursuzluk verebilir, kalp atışını hızlandırıp, nefes darlığı yaşatabilir. Fakat sınav öncesi alınacak bir takım önlemler bu sorunların önüne geçmenizi sağlayabilir.";
-
   static const String tips2 =
       "   Öncelikle kendinize güvenip, başarabileceğinizi düşünün. Özgüven sayesinde başarısızlığı yenebilirsiniz.";
   static const String tips3 =

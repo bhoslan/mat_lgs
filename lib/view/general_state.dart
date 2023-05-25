@@ -27,17 +27,16 @@ class _GeneralStateState extends State<GeneralState> {
     trueNumber = prefs.getInt("true") ?? -1;
     falseNumber = prefs.getInt("false") ?? -1;
     net = prefs.getDouble("net") ?? -1;
-    prefs.reload();
     trueNumber2 = prefs.getInt("true2") ?? -1;
     falseNumber2 = prefs.getInt("false2") ?? -1;
     net2 = prefs.getDouble("net2") ?? -1;
-
+    prefs.reload();
     setState(() {});
   }
 
   @override
   void initState() {
-    // TODO: implement initState
+    
     super.initState();
     setNumbers();
   }
@@ -56,7 +55,7 @@ class _GeneralStateState extends State<GeneralState> {
           borderOnForeground: true,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(_radius)),
           child: Container(
-            margin: EdgeInsets.all(8),
+            margin: const EdgeInsets.all(8),
             child: SingleChildScrollView(
               child: ListBody(children: [
                 Center(
@@ -100,16 +99,18 @@ class _GeneralStateState extends State<GeneralState> {
                         )),
                         TableCell(
                             child: Text("$trueNumber",
-                                style: TextStyle(color: Colors.black, fontWeight: FontWeight.w400))),
+                                style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w400))),
                         TableCell(
                             child: Text("$falseNumber",
-                                style: TextStyle(color: Colors.black, fontWeight: FontWeight.w400))),
+                                style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w400))),
                         TableCell(
-                            child: Text("$net", style: TextStyle(color: Colors.black, fontWeight: FontWeight.w400))),
+                            child:
+                                Text("$net", style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w400))),
                       ],
                     ),
                   ],
                 ),
+                const Divider(),
                 Table(
                   columnWidths: const {
                     0: FlexColumnWidth(2),
@@ -141,12 +142,13 @@ class _GeneralStateState extends State<GeneralState> {
                         )),
                         TableCell(
                             child: Text("$trueNumber2",
-                                style: TextStyle(color: Colors.black, fontWeight: FontWeight.w400))),
+                                style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w400))),
                         TableCell(
                             child: Text("$falseNumber2",
-                                style: TextStyle(color: Colors.black, fontWeight: FontWeight.w400))),
+                                style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w400))),
                         TableCell(
-                            child: Text("$net2", style: TextStyle(color: Colors.black, fontWeight: FontWeight.w400))),
+                            child: Text("$net2",
+                                style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w400))),
                       ],
                     ),
                   ],

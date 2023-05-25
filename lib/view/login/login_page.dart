@@ -5,8 +5,10 @@ import 'package:mat_lgs/component/button/login_buttons.dart';
 import 'package:mat_lgs/component/container/login_text_container.dart';
 import 'package:mat_lgs/component/list-tile/login_listtile.dart';
 import 'package:mat_lgs/constants/app/app_constants.dart';
+import 'package:mat_lgs/models/myuser.dart';
 import 'package:mat_lgs/services/firebase_auth_service.dart';
 import 'package:mat_lgs/utilities/app_padding.dart';
+import 'package:mat_lgs/utilities/app_styles.dart';
 import 'package:mat_lgs/view/home_page.dart';
 import 'package:mat_lgs/view/login/register_page.dart';
 import 'forgot_password_page.dart';
@@ -32,9 +34,12 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: Text(
-          ApplicationConstants.loginTitle,
-          style: Theme.of(context).textTheme.titleLarge!,
+        title: Center(
+          child: Text(
+            ApplicationConstants.loginTitle,
+            //style: Theme.of(context).textTheme.titleLarge!,
+            style: AppStyles.setTitleStyle(context),
+          ),
         ),
       ),
       body: _buildEmailPassword(context),
@@ -56,10 +61,6 @@ class _LoginPageState extends State<LoginPage> {
               child: LoginListTile(
                 focusnode: focusNodeTextFieldOne,
                 email: email,
-                // validator: ((value) =>
-                //     value != null && !EmailValidator.validate(value)
-                //         ? "Geçerli bir email giriniz !"
-                //         : null),
                 hintText: ApplicationConstants.ePosta,
                 keyboardType: TextInputType.emailAddress,
                 prefixIcon: Icons.email,
@@ -85,7 +86,7 @@ class _LoginPageState extends State<LoginPage> {
               children: [
                 Text(
                   ApplicationConstants.password,
-                  style: Theme.of(context).textTheme.bodyText2?.copyWith(color: Colors.grey.shade800),
+                  style: AppStyles.labelStyle(context),
                 ),
                 const _ButtonForgotPassword(),
               ],
@@ -104,7 +105,7 @@ class _LoginPageState extends State<LoginPage> {
               children: [
                 Text(
                   ApplicationConstants.isHaveAccount,
-                  style: Theme.of(context).textTheme.bodyText2?.copyWith(color: Colors.grey.shade800),
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.grey.shade800),
                 ),
                 TextButton(
                     onPressed: () {
@@ -115,10 +116,7 @@ class _LoginPageState extends State<LoginPage> {
                     },
                     child: Text(
                       ApplicationConstants.registerTitle,
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyText2
-                          ?.copyWith(decoration: TextDecoration.underline, color: Colors.blue),
+                      style: AppStyles.linkedUnderlineLabelStyle(context),
                     )),
               ],
             ),
@@ -130,19 +128,17 @@ class _LoginPageState extends State<LoginPage> {
 
   _login(String email, String password) async {
     try {
-      var myUser = await auth
+      MyUser? myUser = await auth
           .signInWithEmailAndPassword(email: email, password: password)
           .then((value) => value.user)
           .then((value) => FirebaseAuthService().fromFirebasetoMyUser(value));
 
-      //   MyUser? myUser = await Provider.of<UserViewModel>(context,listen: false)
-      //       .signInEmailPassword(email, password);
       if (myUser != null) {
         // ignore: use_build_context_synchronously
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => HomePage(),
+            builder: (context) => const HomePage(),
           ),
         );
       }
@@ -169,7 +165,7 @@ class _ButtonForgotPassword extends StatelessWidget {
       child: Text(
         ApplicationConstants.forgotPasswordTitle,
         style:
-            Theme.of(context).textTheme.bodyText2?.copyWith(decoration: TextDecoration.underline, color: Colors.blue),
+            Theme.of(context).textTheme.bodyMedium?.copyWith(decoration: TextDecoration.underline, color: Colors.blue),
       ),
       onPressed: () {
         Navigator.push(

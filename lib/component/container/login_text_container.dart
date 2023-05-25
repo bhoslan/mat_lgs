@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mat_lgs/utilities/app_styles.dart';
 
 class LoginTextContainer extends StatelessWidget {
   final String text;
@@ -10,17 +11,8 @@ class LoginTextContainer extends StatelessWidget {
       alignment: Alignment.centerLeft,
       child: Text(
         text,
-        style: Theme.of(context).textTheme.bodyText2?.copyWith(color: Colors.grey.shade800),
+        style: AppStyles.labelStyle(context),
       ),
     );
   }
 }
-/*
-Container(
-        margin: const EdgeInsets.only(top: 5, left: 20, right: 20),
-        width: 400,
-        height: 20,
-        child: Text(
-          text ,
-          style: const TextStyle(fontWeight: FontWeight.w400),
-        ))*/

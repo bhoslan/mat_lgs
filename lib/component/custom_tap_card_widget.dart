@@ -33,7 +33,7 @@ class _CustomTapCardWidgetState extends State<CustomTapCardWidget> {
     );
   }
 
-  Widget NewCard(BuildContext context) {
+  Widget newCard(BuildContext context) {
     return Card(
       color: Colors.amber,
       borderOnForeground: true,
@@ -52,7 +52,7 @@ class _CustomTapCardWidgetState extends State<CustomTapCardWidget> {
   }
 }
 
-Widget OldCard(BuildContext context) {
+Widget oldCard(BuildContext context) {
   return Card(
     color: Colors.amber,
     borderOnForeground: true,

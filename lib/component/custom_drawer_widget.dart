@@ -1,8 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:mat_lgs/general_info.dart';
 import 'package:mat_lgs/view/general_state.dart';
 import 'package:mat_lgs/view/home_page.dart';
 import 'package:mat_lgs/view/login/login_page.dart';
+import 'package:mat_lgs/view/test/test_info_page.dart';
+import 'package:mat_lgs/view/trueFalse/true_false_info_page.dart';
+import 'package:mat_lgs/view/video/video_info_page.dart';
 
 class CustomDrawer extends StatelessWidget {
   CustomDrawer({
@@ -32,7 +36,11 @@ class CustomDrawer extends StatelessWidget {
             )),
           ),
           ListTile(
-            leading: const Icon(Icons.home, size: 25),
+            leading: const Icon(
+              Icons.home,
+              size: 25,
+              //color: Colors.black,
+            ),
             title: Text(
               "Anasayfa",
               style: Theme.of(context).textTheme.labelLarge,
@@ -45,72 +53,91 @@ class CustomDrawer extends StatelessWidget {
             leading: SizedBox(
                 width: 24,
                 height: 24,
-                child: Image.asset(
-                  "assets/images/open-book.png",
-                  color: Colors.grey,
+                child: Icon(
+                  Icons.video_library,
+                  //color: Colors.black,
                 )),
             title: Text(
-              "Soru ve Konu Takibi",
+              "Videolar",
               style: Theme.of(context).textTheme.labelLarge,
             ),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const VideoInfoPage()));
+            },
+          ),
+          ListTile(
+            leading: SizedBox(
+              width: 24,
+              height: 24,
+              child: Icon(
+                Icons.radio_button_checked,
+                //scolor: Colors.black,
+              ),
+            ),
+            title: Text(
+              "Testler",
+              style: Theme.of(context).textTheme.labelLarge,
+            ),
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const TestInfoPage()));
+            },
           ),
           ListTile(
             leading: SizedBox(
                 width: 24,
                 height: 24,
-                child: Image.asset(
-                  "assets/images/openbook.png",
-                  color: Colors.grey,
+                child: Row(
+                  children: [
+                    Container(
+                      width: 16,
+                      height: 16,
+                      child: Icon(Icons.done),
+                      //color: Colors.black,
+                    ),
+                    Container(
+                      width: 8,
+                      height: 8,
+                      child: Icon(Icons.close),
+                      //color: Colors.black,
+                    )
+                  ],
                 )),
             title: Text(
-              "2020 Örnek Sorular",
+              "Doğru-Yanlış",
               style: Theme.of(context).textTheme.labelLarge,
             ),
-            onTap: () {},
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const TrueFalseInfoPage()));
+            },
           ),
-          ListTile(
-            leading: SizedBox(
-                width: 24,
-                height: 24,
-                child: Image.asset(
-                  "assets/images/openbook2.png",
-                  color: Colors.grey,
-                )),
-            title: Text(
-              "2021 Örnek Sorular",
-              style: Theme.of(context).textTheme.labelLarge,
-            ),
-            onTap: () {},
-          ),
-          ListTile(
-            leading: SizedBox(
-                width: 24,
-                height: 24,
-                child: Image.asset(
-                  "assets/images/dart.png",
-                  color: Colors.grey,
-                )),
-            title: Text(
-              "Günlük Hedefler",
-              style: Theme.of(context).textTheme.labelLarge,
-            ),
-            onTap: () {},
-          ),
-          ListTile(
-            leading: SizedBox(
-                width: 24,
-                height: 24,
-                child: Image.asset(
-                  "assets/images/calculator.png",
-                  color: Colors.grey,
-                )),
-            title: Text(
-              "Puan Hesapla",
-              style: Theme.of(context).textTheme.labelLarge,
-            ),
-            onTap: () {},
-          ),
+          // ListTile(
+          //   leading: SizedBox(
+          //       width: 24,
+          //       height: 24,
+          //       child: Image.asset(
+          //         "assets/images/openbook.png",
+          //         color: Colors.grey,
+          //       )),
+          //   title: Text(
+          //     "2020 Örnek Sorular",
+          //     style: Theme.of(context).textTheme.labelLarge,
+          //   ),
+          //   onTap: () {},
+          // ),
+          // ListTile(
+          //   leading: SizedBox(
+          //       width: 24,
+          //       height: 24,
+          //       child: Image.asset(
+          //         "assets/images/openbook2.png",
+          //         color: Colors.grey,
+          //       )),
+          //   title: Text(
+          //     "2021 Örnek Sorular",
+          //     style: Theme.of(context).textTheme.labelLarge,
+          //   ),
+          //   onTap: () {},
+          // ),
           ListTile(
             leading: SizedBox(
                 width: 24,
@@ -136,10 +163,12 @@ class CustomDrawer extends StatelessWidget {
                   color: Colors.grey,
                 )),
             title: Text(
-              "Genel Sorular",
+              "Genel Bilgiler",
               style: Theme.of(context).textTheme.labelLarge,
             ),
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const GeneralInfo()));
+            },
           ),
           const Divider(),
           ListTile(

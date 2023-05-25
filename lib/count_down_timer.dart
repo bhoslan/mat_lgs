@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 library flutter_timer_countdown;
 
 import 'dart:async';
@@ -18,43 +20,31 @@ enum CountDownTimerFormat {
 }
 
 class TimerCountdown extends StatefulWidget {
-  /// Format for the timer coundtown, choose between different `CountDownTimerFormat`s
   final CountDownTimerFormat format;
 
-  /// Defines the time when the timer is over.
   final DateTime endTime;
 
-  /// Function to call when the timer is over.
   final VoidCallback? onEnd;
 
-  /// Toggle time units descriptions.
   final bool enableDescriptions;
 
-  /// `TextStyle` for the time numbers.
   final TextStyle? timeTextStyle;
 
-  /// `TextStyle` for the colons betwenn the time numbers.
   final TextStyle? colonsTextStyle;
 
-  /// `TextStyle` for the description
   final TextStyle? descriptionTextStyle;
 
-  /// Days unit description.
   final String daysDescription;
 
-  /// Hours unit description.
   final String hoursDescription;
 
-  /// Minutes unit description.
   final String minutesDescription;
 
-  /// Seconds unit description.
   final String secondsDescription;
 
-  /// Defines the width between the colons and the units.
   final double spacerWidth;
 
-  TimerCountdown({
+  const TimerCountdown({super.key, 
     required this.endTime,
     this.format = CountDownTimerFormat.daysHoursMinutesSeconds,
     this.enableDescriptions = true,
@@ -95,10 +85,6 @@ class _TimerCountdownState extends State<TimerCountdown> {
     super.dispose();
   }
 
-  /// Calculate the time difference between now end the given [endTime] and initialize all UI timer values.
-  ///
-  /// Then create a periodic `Timer` which updates all fields every second depending on the time difference which is getting smaller.
-  /// When this difference reached `Duration.zero` the `Timer` is stopped and the [onEnd] callback is invoked.
   void _startTimer() {
     if (widget.endTime.isBefore(DateTime.now())) {
       difference = Duration.zero;
@@ -139,7 +125,6 @@ class _TimerCountdownState extends State<TimerCountdown> {
     return _countDownTimerFormat();
   }
 
-  /// Builds the UI colons between the time units.
   Widget _colon() {
     return Row(
       children: [
@@ -172,7 +157,6 @@ class _TimerCountdownState extends State<TimerCountdown> {
     );
   }
 
-  /// Builds the timer days with its description.
   Widget _days(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -195,7 +179,6 @@ class _TimerCountdownState extends State<TimerCountdown> {
     );
   }
 
-  /// Builds the timer hours with its description.
   Widget _hours(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -218,7 +201,6 @@ class _TimerCountdownState extends State<TimerCountdown> {
     );
   }
 
-  /// Builds the timer minutes with its description.
   Widget _minutes(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -241,7 +223,6 @@ class _TimerCountdownState extends State<TimerCountdown> {
     );
   }
 
-  /// Builds the timer seconds with its description.
   Widget _seconds(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -264,9 +245,6 @@ class _TimerCountdownState extends State<TimerCountdown> {
     );
   }
 
-  /// When the selected [CountDownTimerFormat] is leaving out the last unit, this function puts the UI value of the unit before up by one.
-  ///
-  /// This is done to show the currently running time unit.
   String _twoDigits(int n, String unitType) {
     switch (unitType) {
       case "minutes":
@@ -301,38 +279,36 @@ class _TimerCountdownState extends State<TimerCountdown> {
     }
   }
 
-  /// Convert [Duration] in days to String for UI.
   String _durationToStringDays(Duration duration) {
     return _twoDigits(duration.inDays, "days").toString();
   }
 
-  /// Convert [Duration] in hours to String for UI.
   String _durationToStringHours(Duration duration) {
     if (widget.format == CountDownTimerFormat.hoursMinutesSeconds ||
         widget.format == CountDownTimerFormat.hoursMinutes ||
         widget.format == CountDownTimerFormat.hoursOnly) {
       return _twoDigits(duration.inHours, "hours");
-    } else
+    } else {
       return _twoDigits(duration.inHours.remainder(24), "hours").toString();
+    }
   }
 
-  /// Convert [Duration] in minutes to String for UI.
   String _durationToStringMinutes(Duration duration) {
     if (widget.format == CountDownTimerFormat.minutesSeconds || widget.format == CountDownTimerFormat.minutesOnly) {
       return _twoDigits(duration.inMinutes, "minutes");
-    } else
+    } else {
       return _twoDigits(duration.inMinutes.remainder(60), "minutes");
+    }
   }
 
-  /// Convert [Duration] in seconds to String for UI.
   String _durationToStringSeconds(Duration duration) {
     if (widget.format == CountDownTimerFormat.secondsOnly) {
       return _twoDigits(duration.inSeconds, "seconds");
-    } else
+    } else {
       return _twoDigits(duration.inSeconds.remainder(60), "seconds");
+    }
   }
 
-  /// Switches the UI to be displayed based on [CountDownTimerFormat].
   Widget _countDownTimerFormat() {
     switch (widget.format) {
       case CountDownTimerFormat.daysHoursMinutesSeconds:

@@ -24,7 +24,7 @@ class _TestInfoPageState extends State<TestInfoPage> {
             children: [
               Padding(
                 padding: const EdgeInsets.only(left: 16.0, bottom: 4),
-                child: Container(width: 30, height: 30, child: Image.asset("assets/images/ruler.png")),
+                child: SizedBox(width: 30, height: 30, child: Image.asset("assets/images/ruler.png")),
               ),
               const Expanded(
                 flex: 1,
@@ -58,12 +58,12 @@ class _TestInfoPageState extends State<TestInfoPage> {
               Navigator.of(context).push(MaterialPageRoute(builder: (context) => const TestPage2()));
             },
           ),
-          const CustomButtonTapCardWidget(
-            title: "Test 3 - Aralarında Asal Sayılar",
-          ),
-          const CustomButtonTapCardWidget(
-            title: "Test 4 - Üslü İfadeler",
-          ),
+          // const CustomButtonTapCardWidget(
+          //   title: "Test 3 - Aralarında Asal Sayılar",
+          // ),
+          // const CustomButtonTapCardWidget(
+          //   title: "Test 4 - Üslü İfadeler",
+          // ),
         ]),
       ),
     );
@@ -94,15 +94,9 @@ class _CustomButtonTapCardWidgetState extends State<CustomButtonTapCardWidget> {
           width: MediaQuery.of(context).size.width,
           height: 40,
           child: Row(children: [
-            Checkbox(
-                value: isChecked,
-                checkColor: Colors.white,
-                activeColor: Colors.black,
-                onChanged: (bool? value) {
-                  setState(() {
-                    isChecked = value!;
-                  });
-                }),
+            const SizedBox(
+              width: 20,
+            ),
             Expanded(
               flex: 1,
               child: Text(

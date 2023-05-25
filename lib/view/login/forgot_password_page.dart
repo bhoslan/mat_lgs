@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mat_lgs/component/button/login_buttons.dart';
 import 'package:mat_lgs/component/container/login_text_container.dart';
+import 'package:mat_lgs/view/login/login_page.dart';
 
 import '../../constants/app/app_constants.dart';
 import '../../utilities/app_padding.dart';
@@ -19,6 +21,12 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
 
   @override
   Widget build(BuildContext context) {
+    void navigateLoginPage() {
+      Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => const LoginPage()));
+    }
+
+    int waitingTimeToLoginPage = 5;
+
     return Scaffold(
       appBar: AppBar(
         leading: Builder(
@@ -35,7 +43,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
           ApplicationConstants.forgotPasswordTitle,
           style: Theme.of(context).textTheme.titleLarge!,
         ),
-        elevation: 0, //AppBar'ın arka planını beyaz yapar.
+        elevation: 0,
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -58,22 +66,13 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
               LoginButton(
                   text: "Şifreyi Sıfırla",
                   onPressed: () async {
-                    //try {
-                    //     await _auth.sendPasswordResetEmail(email: email.text);
-                    //   } on FirebaseAuthException catch (e) {
-                    //     if (e.code == "invalid-email") {
-                    //       Fluttertoast.showToast(
-                    //           msg: "Geçersiz e-mail !",
-                    //           gravity: ToastGravity.TOP);
-                    //     }
-                    //     if (e.code == "user-not-found") {
-                    //       Fluttertoast.showToast(
-                    //           msg: "Böyle bir kullanıcı bulunamadı ",
-                    //           gravity: ToastGravity.TOP);
-                    //     }
-                    //   }
-                    // })
-                    resetPassword();
+                    if (await resetPassword()) {
+                      Fluttertoast.showToast(
+                          msg: "Şifre sıfırlama maili başarıyla gönderildi! \n Giriş ekranına yönlendiriliyorsunuz!",
+                          gravity: ToastGravity.TOP);
+                      await Future.delayed(Duration(seconds: waitingTimeToLoginPage));
+                      navigateLoginPage();
+                    }
                   })
             ],
           ),
@@ -82,9 +81,13 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     );
   }
 
-  Future resetPassword() async {
-    debugPrint("Öncesi");
-    await FirebaseAuth.instance.sendPasswordResetEmail(email: email.text.trim());
-    debugPrint("Sonrası");
+  Future<bool> resetPassword() async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email.text.trim());
+    } on FirebaseAuthException catch (e) {
+      Fluttertoast.showToast(msg: e.toString(), gravity: ToastGravity.TOP);
+      return false;
+    }
+    return true;
   }
 }

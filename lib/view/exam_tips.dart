@@ -13,63 +13,63 @@ class ExamTips extends StatelessWidget {
         title: const Text(ApplicationConstants.titleExamTips),
       ),
       drawer: CustomDrawer(),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
+      body: const Padding(
+        padding: EdgeInsets.all(16.0),
         child: SingleChildScrollView(
           child: Column(
             children: [
               CustomTapCardWidget(
                 text: ApplicationConstants.tips1,
               ),
-              const SizedBox(
+              SizedBox(
                 height: 8,
               ),
               CustomTapCardWidget(
                 text: ApplicationConstants.tips2,
               ),
-              const SizedBox(
+              SizedBox(
                 height: 8,
               ),
               CustomTapCardWidget(
                 text: ApplicationConstants.tips3,
               ),
-              const SizedBox(
+              SizedBox(
                 height: 8,
               ),
               CustomTapCardWidget(
                 text: ApplicationConstants.tips4,
               ),
-              const SizedBox(
+              SizedBox(
                 height: 8,
               ),
               CustomTapCardWidget(
                 text: ApplicationConstants.tips5,
               ),
-              const SizedBox(
+              SizedBox(
                 height: 8,
               ),
               CustomTapCardWidget(
                 text: ApplicationConstants.tips6,
               ),
-              const SizedBox(
+              SizedBox(
                 height: 8,
               ),
               CustomTapCardWidget(
                 text: ApplicationConstants.tips7,
               ),
-              const SizedBox(
+              SizedBox(
                 height: 8,
               ),
               CustomTapCardWidget(
                 text: ApplicationConstants.tips8,
               ),
-              const SizedBox(
+              SizedBox(
                 height: 8,
               ),
               CustomTapCardWidget(
                 text: ApplicationConstants.tips9,
               ),
-              const SizedBox(
+              SizedBox(
                 height: 8,
               ),
               CustomTapCardWidget(

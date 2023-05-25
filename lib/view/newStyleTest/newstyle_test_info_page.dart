@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:mat_lgs/constants/app/app_constants.dart';
-import 'package:mat_lgs/view/video/video_player_page.dart';
+import 'package:mat_lgs/view/newStyleTest/newstyle_test_page1.dart';
+import 'package:mat_lgs/view/test/test_page2.dart';
 import '../../component/custom_drawer_widget.dart';
 
-class VideoInfoPage extends StatefulWidget {
-  const VideoInfoPage({super.key});
+class NewStyleTestInfoPage extends StatefulWidget {
+  const NewStyleTestInfoPage({super.key});
 
   @override
-  State<VideoInfoPage> createState() => _VideoInfoPageState();
+  State<NewStyleTestInfoPage> createState() => _NewStyleTestInfoPageState();
 }
 
-class _VideoInfoPageState extends State<VideoInfoPage> {
-  final asset = "assets/videos/video1.mp4";
-
+class _NewStyleTestInfoPageState extends State<NewStyleTestInfoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +30,7 @@ class _VideoInfoPageState extends State<VideoInfoPage> {
                 flex: 1,
                 child: Center(
                   child: Text(
-                    "VİDEO KONULARI",
+                    "TEST KONULARI",
                     style: TextStyle(
                       color: Colors.amber,
                       fontWeight: FontWeight.bold,
@@ -48,32 +47,22 @@ class _VideoInfoPageState extends State<VideoInfoPage> {
         padding: const EdgeInsets.all(16.0),
         child: Column(children: [
           CustomButtonTapCardWidget(
-            title: "Çarpanlar ve Katlar",
+            title: "Test 1 - Çarpanlar ve Katlar",
             onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                    builder: (context) => const VideoPlayerPage(
-                          assetPath: "assets/videos/video1.mp4",
-                        )),
-              );
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => const NewStyleTestPage1()));
             },
           ),
           CustomButtonTapCardWidget(
-            title: "Ebob Ekok",
+            title: "Test 2 - Ebob Ekok",
             onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                    builder: (context) => const VideoPlayerPage(
-                          assetPath: "assets/videos/video2.mp4",
-                        )),
-              );
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => const TestPage2()));
             },
           ),
           // const CustomButtonTapCardWidget(
-          //   title: "Aralarında Asal Sayılar",
+          //   title: "Test 3 - Aralarında Asal Sayılar",
           // ),
           // const CustomButtonTapCardWidget(
-          //   title: "Üslü İfadeler",
+          //   title: "Test 4 - Üslü İfadeler",
           // ),
         ]),
       ),
@@ -91,6 +80,8 @@ class CustomButtonTapCardWidget extends StatefulWidget {
 }
 
 class _CustomButtonTapCardWidgetState extends State<CustomButtonTapCardWidget> {
+  bool isChecked = false;
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -109,7 +100,6 @@ class _CustomButtonTapCardWidgetState extends State<CustomButtonTapCardWidget> {
             Expanded(
               flex: 1,
               child: Text(
-                textAlign: TextAlign.left,
                 widget.title,
                 style: Theme.of(context).textTheme.labelLarge,
               ),

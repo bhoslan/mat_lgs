@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 
 class CountUpTimerPage extends StatefulWidget {
+  const CountUpTimerPage({super.key});
+
   static Future<void> navigatorPush(BuildContext context) async {
     return Navigator.push<void>(
       context,
       MaterialPageRoute(
-        builder: (_) => CountUpTimerPage(),
+        builder: (_) => const CountUpTimerPage(),
       ),
     );
   }

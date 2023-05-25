@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_timer_countdown/flutter_timer_countdown.dart';
+import 'package:mat_lgs/constants/app/app_constants.dart';
+import 'package:mat_lgs/utilities/app_padding.dart';
+import 'package:mat_lgs/utilities/app_styles.dart';
 import 'package:mat_lgs/view/exam_tips.dart';
-import 'package:mat_lgs/view/stopwatchTimer/stopwatch_timer.dart';
+import 'package:mat_lgs/view/newStyleTest/newstyle_test_info_page.dart';
 import 'package:mat_lgs/view/test/test_info_page.dart';
 import 'package:mat_lgs/view/trueFalse/true_false_info_page.dart';
 import 'package:mat_lgs/view/video/video_info_page.dart';
 import '../component/custom_drawer_widget.dart';
+import '../count_down_timer.dart';
+import '../general_info.dart';
+import 'general_state.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,16 +20,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final String _anasayfa = "Anasayfa";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(_anasayfa),
+        title: const Text(ApplicationConstants.homePage),
       ),
       drawer: CustomDrawer(),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: AppPaddings.paddingAll16,
         child: Column(
           children: [
             Container(
@@ -34,30 +38,30 @@ class _HomePageState extends State<HomePage> {
               ),
               width: MediaQuery.of(context).size.width,
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: AppPaddings.paddingAll16,
                 child: Column(
                   children: [
                     const Text(
-                      ("LGS 2023'E KALAN SÜRE"),
+                      (ApplicationConstants.timeRemaining),
                       style: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.normal),
                     ),
                     const SizedBox(
                       height: 5,
                     ),
                     Center(
-                        child: TimerCountdown(
-                          endTime: DateTime(2023, 6, 4, 9, 30),
-                          daysDescription: "Gün",
-                          hoursDescription: "Saat",
-                          secondsDescription: "Saniye",
-                          minutesDescription: "Dakika",
-                          enableDescriptions: true,
-                          timeTextStyle: const TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
-                          descriptionTextStyle:
-                              const TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.normal),
-                          colonsTextStyle: const TextStyle(color: Colors.amber, fontSize: 20),
-                          spacerWidth: 25,
-                        ),
+                      child: TimerCountdown(
+                        endTime: DateTime(2023, 6, 4, 9, 30),
+                        daysDescription: "Gün",
+                        hoursDescription: "Saat",
+                        secondsDescription: "Saniye",
+                        minutesDescription: "Dakika",
+                        enableDescriptions: true,
+                        timeTextStyle: const TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
+                        descriptionTextStyle:
+                            const TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.normal),
+                        colonsTextStyle: TextStyle(color: AppStyles.buttonColorAmber, fontSize: 20),
+                        spacerWidth: 25,
+                      ),
                     ),
                   ],
                 ),
@@ -102,14 +106,14 @@ class _HomePageState extends State<HomePage> {
                   iconImage: Image.asset("assets/images/newGenQuestion.png"),
                   cardText: "Yeni nesil sorular",
                   onTap: () {
-                    return print("Tıklandı");
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const NewStyleTestInfoPage()));
                   },
                 ),
                 CustomCardWidget(
                   iconImage: Image.asset("assets/images/goal.png"),
-                  cardText: "Günlük hedefler",
+                  cardText: "Genel durum",
                   onTap: () {
-                    return print("Tıklandı");
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const GeneralState()));
                   },
                 ),
                 CustomCardWidget(
@@ -132,10 +136,12 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 CustomCardWidget(
-                  iconImage: Image.asset("assets/images/stopwatch.png"),
-                  cardText: "Zamanlayıcı",
+                  iconImage: Image.asset(
+                    "assets/images/information.png",
+                  ),
+                  cardText: "Genel Bilgiler",
                   onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const StopwatchTimer()));
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const GeneralInfo()));
                   },
                 ),
               ],
@@ -148,7 +154,7 @@ class _HomePageState extends State<HomePage> {
 }
 
 class CustomCardWidget extends StatelessWidget {
-  CustomCardWidget({
+  const CustomCardWidget({
     Key? key,
     required this.cardText,
     required this.iconImage,
@@ -172,7 +178,7 @@ class CustomCardWidget extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Container(width: 60, height: 60, child: iconImage),
+              SizedBox(width: 60, height: 60, child: iconImage),
               Text(
                 cardText,
                 style: Theme.of(context).textTheme.labelLarge,

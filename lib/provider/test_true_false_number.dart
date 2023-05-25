@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -31,7 +29,7 @@ class TestTrueFalseNumber extends ChangeNotifier {
   }
 
   double calculateNet() {
-    net = trueNumber1 - falseNumber1 / 4;
+    net = double.parse((trueNumber1 - falseNumber1 / 3).toStringAsFixed(2));
     return net;
   }
 

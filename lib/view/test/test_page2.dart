@@ -30,7 +30,7 @@ class _TestPage2State extends State<TestPage2> {
             drawer: CustomDrawer(),
             body: Column(
               children: [
-                Expanded(flex: 9, child: PhotoView(imageProvider: const AssetImage("assets/tests/test1-1.JPG"))),
+                Expanded(flex: 9, child: PhotoView(imageProvider: const AssetImage("assets/tests/ebob-ekok1.jpeg"))),
                 Expanded(
                     flex: 2,
                     child: Padding(
@@ -43,7 +43,7 @@ class _TestPage2State extends State<TestPage2> {
                                 children: [
                                   const OptionsButtonWidgetTest2(correctAnswer: "A", questionNumber: "1"),
                                   SizedBox(width: MediaQuery.of(context).size.width / 8),
-                                  const OptionsButtonWidgetTest2(correctAnswer: "B", questionNumber: "2"),
+                                  const OptionsButtonWidgetTest2(correctAnswer: "C", questionNumber: "2"),
                                 ],
                               ),
                             ],
@@ -53,9 +53,9 @@ class _TestPage2State extends State<TestPage2> {
                           ),
                           Row(
                             children: [
-                              const OptionsButtonWidgetTest2(correctAnswer: "C", questionNumber: "3"),
+                              const OptionsButtonWidgetTest2(correctAnswer: "D", questionNumber: "3"),
                               SizedBox(width: MediaQuery.of(context).size.width / 8),
-                              const OptionsButtonWidgetTest2(correctAnswer: "D", questionNumber: "4"),
+                              const OptionsButtonWidgetTest2(correctAnswer: "C", questionNumber: "4"),
                             ],
                           ),
                           const SizedBox(
@@ -65,7 +65,7 @@ class _TestPage2State extends State<TestPage2> {
                             children: [
                               const OptionsButtonWidgetTest2(correctAnswer: "A", questionNumber: "5"),
                               SizedBox(width: MediaQuery.of(context).size.width / 8),
-                              const OptionsButtonWidgetTest2(correctAnswer: "B", questionNumber: "6"),
+                              const OptionsButtonWidgetTest2(correctAnswer: "C", questionNumber: "6"),
                             ],
                           ),
                         ],
@@ -160,7 +160,7 @@ class _TestPage2State extends State<TestPage2> {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: const Center(child: Text("KAPAT", style: const TextStyle(color: Colors.amber))),
+                child: const Center(child: Text("KAPAT", style: TextStyle(color: Colors.amber))),
               ),
             ],
           )),

@@ -58,22 +58,10 @@ class _RegisterPageState extends State<RegisterPage> {
           scrollDirection: Axis.vertical,
           child: Column(
             children: [
-              // LoginListTile(
-              //   email: userName,
-              //   prefixIcon: Icons.nest_cam_wired_stand,
-              //   hintText: "Kullanıcı Adı",
-              // ),
-              // const LoginTextContainer(
-              //   text: "Kullanıcı Adı",
-
               Form(
                 key: formKey1,
                 child: LoginListTile(
                   email: email,
-                  // validator: ((value) =>
-                  //     value != null && !EmailValidator.validate(value)
-                  //         ? "Geçerli bir email giriniz !"
-                  //         : null),
                   hintText: ApplicationConstants.ePosta,
                   keyboardType: TextInputType.emailAddress,
                   prefixIcon: Icons.email,
@@ -102,7 +90,6 @@ class _RegisterPageState extends State<RegisterPage> {
                 minLength: 6,
                 uppercaseCharCount: 1,
                 numericCharCount: 2,
-                //specialCharCount: 1,
                 normalCharCount: 3,
                 width: 400,
                 height: 150,
@@ -113,15 +100,6 @@ class _RegisterPageState extends State<RegisterPage> {
                   debugPrint("Eşleşmedi");
                 },
               ),
-
-              // LoginListTile(
-              //   email: password,
-              //   hintText: "Şifre",
-              //   iconColor: Colors.grey,
-              //   keyboardType: TextInputType.visiblePassword,
-              //   prefixIcon: Icons.lock_outline,
-              //   obscureText: true,
-              // ),
               const SizedBox(
                 height: 8,
               ),
@@ -178,17 +156,18 @@ class _RegisterPageState extends State<RegisterPage> {
   _register(String email, String password) async {
     try {
       MyUser? myUser = await _auth
-          .signInWithEmailAndPassword(email: email, password: password)
+          .createUserWithEmailAndPassword(email: email, password: password)
           .then((value) => value.user)
           .then((value) => FirebaseAuthService().fromFirebasetoMyUser(value));
       if (myUser != null) {
-        // Fluttertoast.showToast(msg: "Başarıyla kayıt oldunuz. Giriş ekranına yönlendiriliyorsunuz.");
-        // const Duration(seconds: 3);
+        Fluttertoast.showToast(
+            msg: "Kaydınız başarılı ile gerçekleşti! \n Anasayfaya yönlendiriliyorsunuz!", gravity: ToastGravity.TOP);
+        await Future.delayed(const Duration(seconds: 5));
         // ignore: use_build_context_synchronously
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => HomePage(),
+            builder: (context) => const HomePage(),
           ),
         );
       }
@@ -196,7 +175,7 @@ class _RegisterPageState extends State<RegisterPage> {
       if (e.code == "email-already-in-use") {
         Fluttertoast.showToast(msg: "Bu kullanıcı zaten kayıtlı!", gravity: ToastGravity.TOP);
       } else if (e.code == "invalid-email") {
-        Fluttertoast.showToast(msg: "Geçersiz e-mail");
+        Fluttertoast.showToast(msg: "Geçersiz e-mail", gravity: ToastGravity.TOP);
       }
     }
   }
